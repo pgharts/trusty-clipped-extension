@@ -26,8 +26,8 @@ namespace :radiant do
         Dir[ClippedExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
           path = file.sub(ClippedExtension.root, '')
           directory = File.dirname(path)
-          mkdir_p RAILS_ROOT + directory, :verbose => false
-          cp_r file, RAILS_ROOT + path, :verbose => false
+          mkdir_p Rails.root + directory, :verbose => false
+          cp_r file, Rails.root + path, :verbose => false
         end
 
         desc "Syncs all available translations for this ext to the English ext master"
@@ -49,7 +49,7 @@ namespace :radiant do
       
       desc "Exports assets from database to assets directory"
       task :export => :environment do
-        asset_path = File.join(RAILS_ROOT, "assets")
+        asset_path = File.join(Rails.root, "assets")
         mkdir_p asset_path
         Asset.find(:all).each do |asset|
           puts "Exporting #{asset.asset_file_name}"
@@ -60,7 +60,7 @@ namespace :radiant do
 
       desc "Imports assets to database from assets directory"
       task :import => :environment do
-        asset_path = File.join(RAILS_ROOT, "assets")
+        asset_path = File.join(Rails.root, "assets")
         if File.exist?(asset_path) && File.stat(asset_path).directory?
           Dir.glob("#{asset_path}/*").each do |file_with_path|
             if File.stat(file_with_path).file?
@@ -81,9 +81,9 @@ If you would like to use this mode type \"yes\", type \"no\" or just hit enter t
         OldPageAttachment.find_all_by_parent_id(nil).each do |opa|
           asset = opa.create_paperclipped_record
           # move the actual file
-          old_dir = "#{RAILS_ROOT}/public/page_attachments/0000/#{opa.id.to_s.rjust(4,'0')}"
-          new_dir = "#{RAILS_ROOT}/public/assets/#{asset.id}"
-          puts "Copying #{old_dir.gsub(RAILS_ROOT, '')}/#{opa.filename} to #{new_dir.gsub(RAILS_ROOT, '')}/#{opa.filename}..."
+          old_dir = "#{Rails.root}/public/page_attachments/0000/#{opa.id.to_s.rjust(4,'0')}"
+          new_dir = "#{Rails.root}/public/assets/#{asset.id}"
+          puts "Copying #{old_dir.gsub(Rails.root, '')}/#{opa.filename} to #{new_dir.gsub(Rails.root, '')}/#{opa.filename}..."
           mkdir_p new_dir
           cp old_dir + "/#{opa.filename}", new_dir + "/#{opa.filename}"
           # remove old record and remainings
@@ -116,7 +116,7 @@ If you would like to use this mode type \"yes\", type \"no\" or just hit enter t
       desc "Generate an example initializer"
       task :initialize do
         puts "Copying initializer from ClippedExtension"
-        cp ClippedExtension.root + "/lib/generators/templates/clipped_config.rb", RAILS_ROOT + "/config/initializers/", :verbose => false
+        cp ClippedExtension.root + "/lib/generators/templates/clipped_config.rb", Rails.root + "/config/initializers/", :verbose => false
       end
 
     end
