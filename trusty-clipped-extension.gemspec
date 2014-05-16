@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "radiant-clipped-extension"
+require "trusty-clipped-extension"
 
 Gem::Specification.new do |s|
-  s.name        = "radiant-clipped-extension"
+  s.name        = "trusty-clipped-extension"
   s.version     = TrustyCmsClippedExtension::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = TrustyCmsClippedExtension::AUTHORS

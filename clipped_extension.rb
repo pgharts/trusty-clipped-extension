@@ -1,4 +1,4 @@
-require 'radiant-clipped-extension'
+require 'trusty-clipped-extension'
 require 'acts_as_list'
 require 'uuidtools'
 require 'cloud'
