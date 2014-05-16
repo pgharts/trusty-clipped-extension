@@ -3,10 +3,10 @@ require 'acts_as_list'
 require 'uuidtools'
 require 'cloud'
 
-class ClippedExtension < Radiant::Extension
-  version RadiantClippedExtension::VERSION
-  description RadiantClippedExtension::DESCRIPTION
-  url RadiantClippedExtension::URL
+class ClippedExtension < TrustyCms::Extension
+  version TrustyCmsClippedExtension::VERSION
+  description TrustyCmsClippedExtension::DESCRIPTION
+  url TrustyCmsClippedExtension::URL
 
   migrate_from 'Paperclipped', 20100327111216
 
@@ -14,7 +14,7 @@ class ClippedExtension < Radiant::Extension
     require 'paperclip/geometry_transformation'
     if Asset.table_exists?
       Page.send :include, PageAssetAssociations                                          # defines page-asset associations. likely to be generalised soon.
-      Radiant::AdminUI.send :include, ClippedAdminUI unless defined? admin.asset         # defines shards for extension of the asset-admin interface
+      TrustyCms::AdminUI.send :include, ClippedAdminUI unless defined? admin.asset         # defines shards for extension of the asset-admin interface
       Admin::PagesController.send :helper, Admin::AssetsHelper                           # currently only provides a description of asset sizes
       Page.send :include, AssetTags                                                      # radius tags for selecting sets of assets and presenting each one
       UserActionObserver.instance.send :add_observer!, Asset                             # the usual creator- and updater-stamping
@@ -28,15 +28,15 @@ class ClippedExtension < Radiant::Extension
       AssetType.new :document, :icon => 'document', :mime_types => %w[application/msword application/rtf application/vnd.ms-excel application/vnd.ms-powerpoint application/vnd.ms-project application/vnd.ms-works text/plain text/html]
       AssetType.new :other, :icon => 'unknown'
 
-      admin.asset ||= Radiant::AdminUI.load_default_asset_regions                        # loads the shards defined in AssetsAdminUI
+      admin.asset ||= TrustyCms::AdminUI.load_default_asset_regions                        # loads the shards defined in AssetsAdminUI
       admin.page.edit.add :form, 'assets', :after => :edit_page_parts                    # adds the asset-attachment picker to the page edit view
       admin.page.edit.add :main, 'asset_popups', :after => :edit_popups                  # adds the asset-attachment picker to the page edit view
       admin.page.edit.asset_popups.concat %w{upload_asset attach_asset}
       admin.configuration.show.add :config, 'admin/configuration/clipped_show', :after => 'defaults'
       admin.configuration.edit.add :form,   'admin/configuration/clipped_edit', :after => 'edit_defaults'
     
-      if Radiant::Config.table_exists? && Radiant::config["paperclip.command_path"]    # This is needed for testing if you are using mod_rails
-        Paperclip.options[:command_path] = Radiant::config["paperclip.command_path"]
+      if TrustyCms::Config.table_exists? && TrustyCms::config["paperclip.command_path"]    # This is needed for testing if you are using mod_rails
+        Paperclip.options[:command_path] = TrustyCms::config["paperclip.command_path"]
       end
 
       tab "Assets", :after => "Content" do

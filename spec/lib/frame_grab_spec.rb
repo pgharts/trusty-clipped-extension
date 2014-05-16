@@ -5,7 +5,7 @@ describe Paperclip::FrameGrab do
   let(:file) { File.new(File.join( File.dirname(__FILE__), "..", "fixtures", "test.flv")) }
   let(:asset) { assets(:video) }
 
-  if Radiant.config['assets.create_video_thumbnails?']
+  if TrustyCms.config['assets.create_video_thumbnails?']
     context "processing video attachment" do
       it "should create png icon and thumbnail"
       it "should create jpeg file at configured size"

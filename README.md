@@ -1,10 +1,10 @@
-# Radiant Clipped Extension
+# TrustyCms Clipped Extension
 
 [![Build Status](https://secure.travis-ci.org/radiant/radiant-clipped-extension.png)](http://travis-ci.org/radiant/radiant-clipped-extension)
 
-Asset management for Radiant CMS.
+Asset management for TrustyCms CMS.
 
-The Clipped extension comes bundled with the Radiant gem but may be updated separately. Only Radiant versions 1.0 or newer are supported.
+The Clipped extension comes bundled with the TrustyCms gem but may be updated separately. Only TrustyCms versions 1.0 or newer are supported.
 
 Please file bugs and feature requests on [Github][issues]. If you have questions regarding usage ask on the [mailing list][mailing-list].
 
@@ -23,7 +23,7 @@ Please file bugs and feature requests on [Github][issues]. If you have questions
 
 ## Installation
 
-If you installed the Radiant gem then you already have Clipped installed. You can upgrade to a newer version using `bundle update radiant-clipped-extension`.
+If you installed the TrustyCms gem then you already have Clipped installed. You can upgrade to a newer version using `bundle update radiant-clipped-extension`.
 
 Installation of the optional post-processors varies by system but are likely available through your package manager.
 
@@ -117,7 +117,7 @@ And you can set some defaults:
 
 To configure different thumbnail sizes, set `assets.thumbnails.image`. Here is an example of setting two custom thumbnail sizes:
 
-    Radiant::Config['assets.thumbnails.image'] = "custom:geometry=200x300>,format=jpg|bigger:geometry=600x700>,format=jpg"
+    TrustyCms::Config['assets.thumbnails.image'] = "custom:geometry=200x300>,format=jpg|bigger:geometry=600x700>,format=jpg"
 
 ## Usage
 
@@ -187,4 +187,4 @@ Pull requests with working tests are preferred and have a greater chance of bein
 * John Long
 * William Ross
 
-Copyright 2011 the Radiant team. Released under the same terms as Radiant.
+Copyright 2011 the TrustyCms team. Released under the same terms as TrustyCms.

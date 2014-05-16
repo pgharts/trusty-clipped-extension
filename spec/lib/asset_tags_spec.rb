@@ -26,8 +26,8 @@ describe AssetTags do
   
   context "rendering tag" do
     before do
-      Radiant.config['assets.create_image_thumbnails?'] = true
-      Radiant.config['assets.thumbnails.image'] = 'normal:size=640x640>|small:size=320x320>'
+      TrustyCms.config['assets.create_image_thumbnails?'] = true
+      TrustyCms.config['assets.thumbnails.image'] = 'normal:size=640x640>|small:size=320x320>'
     end
     
     it "assets:each" do

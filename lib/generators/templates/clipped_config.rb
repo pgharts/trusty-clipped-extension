@@ -1,4 +1,4 @@
-Radiant.config do |config|
+TrustyCms.config do |config|
 
   # Uncomment and change the settings below to customize the Clipped extension
 

@@ -87,7 +87,7 @@ class AssetType
   end
 
   def paperclip_processors
-    Radiant.config["assets.create_#{name}_thumbnails?"] ? processors : []
+    TrustyCms.config["assets.create_#{name}_thumbnails?"] ? processors : []
   end
   
   # Parses and combines the various ways in which paperclip styles can be defined, and normalises them into
@@ -144,7 +144,7 @@ class AssetType
   # This method parses that string and returns the defined styles as a hash of style-defining strings that will later be normalized into hashes.
   #
   def configured_styles
-    @configured_styles ||= if style_definitions = Radiant.config["assets.thumbnails.#{name}"]
+    @configured_styles ||= if style_definitions = TrustyCms.config["assets.thumbnails.#{name}"]
       style_definitions.split('|').each_with_object({}) do |definition, styles|
         name, rule = definition.split(':')
         styles[name.strip.to_sym] = rule.to_s.strip
@@ -155,7 +155,7 @@ class AssetType
   end
   
   def legacy_styles
-    Radiant::config["assets.additional_thumbnails"].to_s.gsub(' ','').split(',').collect{|s| s.split('=')}.inject({}) {|ha, (k, v)| ha[k.to_sym] = v; ha}
+    TrustyCms::config["assets.additional_thumbnails"].to_s.gsub(' ','').split(',').collect{|s| s.split('=')}.inject({}) {|ha, (k, v)| ha[k.to_sym] = v; ha}
   end
   
   def style_dimensions(style_name)

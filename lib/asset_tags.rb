@@ -1,5 +1,5 @@
 module AssetTags
-  include Radiant::Taggable
+  include TrustyCms::Taggable
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::AssetTagHelper
   
@@ -222,7 +222,7 @@ module AssetTags
     
     Using the optional @size@ attribute, different sizes can be display.
     "thumbnail" and "icon" sizes are built in, but custom ones can be set
-    by changing `assets.thumbnails.[type]` in the Radiant::Config settings.
+    by changing `assets.thumbnails.[type]` in the TrustyCms::Config settings.
     
     *Usage:* 
     <pre><code><r:asset:image [name="asset name" or id="asset id"] [size="icon|thumbnail|whatever"]></code></pre>

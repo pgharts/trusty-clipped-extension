@@ -9,3 +9,17 @@ db/schema.rb
 *.swp
 pkg/*
 *.gem
+
+
+.ruby-gemset
+.ruby-version
+.idea/
+.eprj
+*.*~
+**/thumbs.db
+**/Thumbs.db
+**/.DS_Store
+
+vendor/plugins/rails_upgrade
+*.rails2
+

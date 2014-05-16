@@ -4,13 +4,13 @@ require "radiant-clipped-extension"
 
 Gem::Specification.new do |s|
   s.name        = "radiant-clipped-extension"
-  s.version     = RadiantClippedExtension::VERSION
+  s.version     = TrustyCmsClippedExtension::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = RadiantClippedExtension::AUTHORS
-  s.email       = RadiantClippedExtension::EMAIL
-  s.homepage    = RadiantClippedExtension::URL
-  s.summary     = RadiantClippedExtension::SUMMARY
-  s.description = RadiantClippedExtension::DESCRIPTION
+  s.authors     = TrustyCmsClippedExtension::AUTHORS
+  s.email       = TrustyCmsClippedExtension::EMAIL
+  s.homepage    = TrustyCmsClippedExtension::URL
+  s.summary     = TrustyCmsClippedExtension::SUMMARY
+  s.description = TrustyCmsClippedExtension::DESCRIPTION
 
   s.add_dependency "acts_as_list", "0.1.4"
   s.add_dependency "paperclip",    "~> 2.7.0"

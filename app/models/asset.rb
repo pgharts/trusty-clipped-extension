@@ -39,13 +39,13 @@ class Asset < ActiveRecord::Base
                       asset.paperclip_processors
                     },
                     :whiny => false,
-                    :storage => Radiant.config["paperclip.storage"],
-                    :path => Radiant.config["paperclip.path"],
-                    :url => Radiant.config["paperclip.url"],
-                    :fog_credentials => RadiantClippedExtension::Cloud.credentials,
-                    :fog_directory => Radiant.config["paperclip.fog.directory"],
-                    :fog_public => Radiant.config["paperclip.fog.public?"] || true,
-                    :fog_host => RadiantClippedExtension::Cloud.host
+                    :storage => TrustyCms.config["paperclip.storage"],
+                    :path => TrustyCms.config["paperclip.path"],
+                    :url => TrustyCms.config["paperclip.url"],
+                    :fog_credentials => TrustyCmsClippedExtension::Cloud.credentials,
+                    :fog_directory => TrustyCms.config["paperclip.fog.directory"],
+                    :fog_public => TrustyCms.config["paperclip.fog.public?"] || true,
+                    :fog_host => TrustyCmsClippedExtension::Cloud.host
 
   before_save :assign_title
   before_save :assign_uuid
@@ -53,10 +53,10 @@ class Asset < ActiveRecord::Base
   after_post_process :read_dimensions
 
   validates_attachment_presence :asset, :message => "You must choose a file to upload!"
-  if Radiant.config["paperclip.skip_filetype_validation"] != "true" && Radiant.config['paperclip.content_types']
-    validates_attachment_content_type :asset, :content_type => Radiant.config["paperclip.content_types"].gsub(' ','').split(',')
+  if TrustyCms.config["paperclip.skip_filetype_validation"] != "true" && TrustyCms.config['paperclip.content_types']
+    validates_attachment_content_type :asset, :content_type => TrustyCms.config["paperclip.content_types"].gsub(' ','').split(',')
   end
-  validates_attachment_size :asset, :less_than => ( Radiant.config["assets.max_asset_size"] || 5 ).to_i.megabytes
+  validates_attachment_size :asset, :less_than => ( TrustyCms.config["assets.max_asset_size"] || 5 ).to_i.megabytes
 
   def asset_type
     AssetType.for(asset)
@@ -191,15 +191,15 @@ private
     # searching and pagination moved to the controller
 
     def find_all_by_asset_types(asset_types, *args)
-      with_asset_types(asset_types) { find *args }
+      with_asset_types(asset_types) { where *args }
     end
 
     def count_with_asset_types(asset_types, *args)
-      with_asset_types(asset_types) { count *args }
+      with_asset_types(asset_types) { where(*args).count }
     end
 
     def with_asset_types(asset_types, &block)
-      with_scope(:find => { :conditions => AssetType.conditions_for(asset_types) }, &block)
+      with_scope(where(AssetType.conditions_for(asset_types)), &block)
     end
   end
 

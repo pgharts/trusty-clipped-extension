@@ -6,7 +6,7 @@ module Admin::AssetsHelper
   
   def asset_insertion_link(asset)
     radius_tag = asset.asset_type.default_radius_tag || 'link';
-    link_to t('clipped_extension.insert'), '#', :class => 'insert_asset', :rel => "#{radius_tag}_#{Radiant.config['assets.insertion_size']}_#{asset.id}"
+    link_to t('clipped_extension.insert'), '#', :class => 'insert_asset', :rel => "#{radius_tag}_#{TrustyCms.config['assets.insertion_size']}_#{asset.id}"
   end
   
   def asset_attachment_link(asset)

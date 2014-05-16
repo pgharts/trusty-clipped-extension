@@ -31,7 +31,7 @@ describe AssetType do
   end
   
   context 'with initialized thumbnail sizes' do
-    before { Radiant.config["assets.create_complex_thumbnails?"] = true }
+    before { TrustyCms.config["assets.create_complex_thumbnails?"] = true }
     subject{ AssetType.find(:complex) }
     its(:paperclip_processors) { should == [:dummy] }
     its(:paperclip_styles) { should_not be_empty }
@@ -41,8 +41,8 @@ describe AssetType do
 
   context 'with configured thumbnail sizes' do
     before { 
-      Radiant.config["assets.create_configured_thumbnails?"] = true 
-      Radiant.config["assets.thumbnails.configured"] = "special:size=800x800>,format=jpg|tiny:size=10x10#,format=png|custom:size=1x1,convert_options=-quality 33 -interlace Plane"
+      TrustyCms.config["assets.create_configured_thumbnails?"] = true
+      TrustyCms.config["assets.thumbnails.configured"] = "special:size=800x800>,format=jpg|tiny:size=10x10#,format=png|custom:size=1x1,convert_options=-quality 33 -interlace Plane"
     }
     subject{ AssetType.find(:configured) }
     its(:paperclip_processors) { should == [:dummy] }

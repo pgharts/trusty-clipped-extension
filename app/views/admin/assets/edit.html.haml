@@ -15,7 +15,7 @@
             %label.filename
               = "#{t("clipped_extension.filename")}: #{@asset.asset_file_name unless @asset.new_record?}"
           %p.asset
-            - display_size = Radiant::config['assets.display_size'] || 'normal'
+            - display_size = TrustyCms::config['assets.display_size'] || 'normal'
             = image_tag @asset.thumbnail(display_size.to_sym), :class => 'preview'
 
           = updated_stamp @asset
