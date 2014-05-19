@@ -1,8 +1,14 @@
-ActionController::Routing::Routes.draw do |map|
-  map.namespace :admin, :member => { :remove => :get } do |admin|
-    admin.resources :assets, :collection => { :refresh => :get, :regenerate => :post }, :member => { :refresh => :put }
-    admin.resources :page_attachments, :only => [:new]
-    admin.resources :pages, :has_many => :page_attachments
-  end
+TrustyCms::Application.routes.draw
+  namespace :admin do
+    get :remove, on: :member
+    resources :assets do
+      get :refresh, on: :collection
+      post :regenerate, on: :collection
+      put :refresh, on: :member
+    end
+    resources :page_attachments, :only => [:new]
+    resources :pages do
+      resources :page_attachments
+    end
 end
 
