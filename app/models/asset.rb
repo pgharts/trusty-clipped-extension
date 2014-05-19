@@ -8,20 +8,20 @@ class Asset < ActiveRecord::Base
 
   default_scope :order => "created_at DESC"
 
-  named_scope :latest, lambda { |limit|
+  scope :latest, lambda { |limit|
     { :order => "created_at DESC", :limit => limit }
   }
 
-  named_scope :of_types, lambda { |types|
+  scope :of_types, lambda { |types|
     mimes = AssetType.slice(*types).map(&:mime_types).flatten
     { :conditions => ["asset_content_type IN (#{mimes.map{'?'}.join(',')})", *mimes] }
   }
 
-  named_scope :matching, lambda { |term| 
+  scope :matching, lambda { |term|
     { :conditions => ["LOWER(assets.asset_file_name) LIKE (:term) OR LOWER(title) LIKE (:term) OR LOWER(caption) LIKE (:term)", {:term => "%#{term.downcase}%" }] }
   }
 
-  named_scope :except, lambda { |assets| 
+  scope :except, lambda { |assets|
     if assets.any?
       assets = assets.split(',') if assets.is_a?(String)
       asset_ids = assets.first.is_a?(Asset) ? assets.map(&:id) : assets
