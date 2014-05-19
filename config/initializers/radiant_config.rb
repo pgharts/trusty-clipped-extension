@@ -1,4 +1,4 @@
-TrustyCms::Applicaiton.config do |config|
+TrustyCms::Application.config do |config|
   config.namespace 'paperclip' do |pc|
     pc.define 'url',                      :default => '/system/:attachment/:id/:style/:basename:no_original_style.:extension', :allow_change => true
     pc.define 'path',                     :default => ':rails_root/public/system/:attachment/:id/:style/:basename:no_original_style.:extension', :allow_change => true
