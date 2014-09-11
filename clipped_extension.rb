@@ -2,6 +2,7 @@ require 'trusty-clipped-extension'
 require 'acts_as_list'
 require 'uuidtools'
 require 'cloud'
+require 'paperclip'
 
 class ClippedExtension < TrustyCms::Extension
   version TrustyCmsClippedExtension::VERSION
@@ -11,7 +12,6 @@ class ClippedExtension < TrustyCms::Extension
   migrate_from 'Paperclipped', 20100327111216
 
   def activate
-    require 'paperclip/geometry_transformation'
     if Asset.table_exists?
       Page.send :include, PageAssetAssociations                                          # defines page-asset associations. likely to be generalised soon.
       TrustyCms::AdminUI.send :include, ClippedAdminUI unless defined? admin.asset         # defines shards for extension of the asset-admin interface

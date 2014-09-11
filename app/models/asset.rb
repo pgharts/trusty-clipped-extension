@@ -1,4 +1,6 @@
 class Asset < ActiveRecord::Base
+  include Paperclip::Glue
+
   has_many :page_attachments, :dependent => :destroy
   has_many :pages, :through => :page_attachments
   has_site if respond_to? :has_site
