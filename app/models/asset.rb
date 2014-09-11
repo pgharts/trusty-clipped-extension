@@ -49,6 +49,8 @@ class Asset < ActiveRecord::Base
                     :fog_public => TrustyCms.config["paperclip.fog.public?"] || true,
                     :fog_host => TrustyCmsClippedExtension::Cloud.host
 
+  validates_attachment_content_type :asset, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf", "application/javascript", "text/javascript", "text/css"]
+
   before_save :assign_title
   before_save :assign_uuid
   
