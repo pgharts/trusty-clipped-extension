@@ -16,11 +16,12 @@ class Admin::AssetsController < Admin::ResourceController
     
     @assets = paginated? ? assets.paginate(pagination_parameters) : assets.all
     respond_to do |format|
-      format.html { render }
-      format.js { 
+
+      format.js {
         @page = Page.find_by_id(params[:page_id])
         render :partial => 'asset_table', :locals => {:with_pagination => !!@page}
       }
+      format.html { render }
     end
   end
   
