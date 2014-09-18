@@ -7,7 +7,7 @@ class Admin::AssetsController < Admin::ResourceController
     @term = params[:search] || ''
     assets = assets.matching(@term) if @term && !@term.blank?
     
-    @types = params[:filter] || []
+    @types = params[:filter] ? params[:filter].split(",") : []
     if @types.include?('all')
       params[:filter] = nil
     elsif @types.any?
