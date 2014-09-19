@@ -111,38 +111,6 @@ Asset.Sortable = Behavior.create({
 
 // Asset-filter and search functions are available wherever the asset_table partial is displayed
 
-Asset.DeselectFileTypes = Behavior.create({
-  onclick: function(e){
-    e.stop();
-    var element = this.element;
-    if(!element.hasClassName('pressed')) {
-      $$('a.selective').each(function(el) { el.removeClassName('pressed'); });
-      $$('input.selective').each(function(el) { el.removeAttribute('checked'); });
-      element.addClassName('pressed');
-      Asset.UpdateTable(true);
-    }
-  }
-});
-
-Asset.SelectFileType = Behavior.create({
-  onclick: function(e){
-    e.stop();
-    var element = this.element;
-    var type_id = element.readAttribute("rel");
-    var type_check = $(type_id + '-check');
-    if(element.hasClassName('pressed')) {
-      element.removeClassName('pressed');
-      type_check.removeAttribute('checked');
-      if ($$('a.selective.pressed').length == 0) $('select_all').addClassName('pressed');
-    } else {
-      element.addClassName('pressed');
-      $$('a.deselective').each(function(el) { el.removeClassName('pressed'); });
-      type_check.setAttribute('checked', 'checked');
-    }
-    Asset.UpdateTable(true);
-  }
-});
-
 Asset.SearchForm = Behavior.create({
   initialize: function () {
     this.observer = new Form.Element.Observer(this.element.down('input.search'), 2, Asset.UpdateTable);
@@ -269,8 +237,6 @@ Event.addBehavior({
   'a.attach_asset': Asset.Attach,
   'a.detach_asset': Asset.Detach,
   'a.insert_asset': Asset.Insert,
-  'a.deselective': Asset.DeselectFileTypes,
-  'a.selective': Asset.SelectFileType,
   'form.search': Asset.SearchForm,
   '#assets_table .pagination a': Asset.Pagination
 });
