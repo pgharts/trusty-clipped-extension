@@ -68,5 +68,21 @@ $(function() {
     });
   });
 
+  $('#filesearchforminput').keyup(function(){
+    Assets.filterAssets();
+  });
+
+  $("#upload_asset_link").click(function(e) {
+    e.preventDefault();
+    Popup.close();
+    $('#attach_asset').hide();
+    Popup.show('upload_asset');
+
+    $('.close_popup').click(function(e){
+      e.preventDefault();
+      Popup.close();
+      $('#upload_asset').hide();
+    });
+  });
 
 });

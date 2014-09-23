@@ -5,7 +5,7 @@
       
       .popup_title= t('clipped_extension.upload_asset')
       
-      - form_for([:admin, Asset.new], :html => {:method => 'post', :multipart => true, :class => 'upload_asset'}) do |f|
+      = form_for([:admin, Asset.new], :html => {:method => 'post', :multipart => true, :class => 'upload_asset'}) do |f|
         = hidden_field_tag "for_attachment", 1
         = hidden_field_tag "page_id", @page.id
         
@@ -39,4 +39,4 @@
       .busy{:style => "display: none"}= image('spinner.gif', :alt => "")
       .buttons
         %a.cancel.close_popup{:href=>"#"}= t('close')
-        %a.upload-popup{:href=>"#upload_asset", :style => 'color: #666; float: left'}= t('clipped_extension.upload_asset')
+        %a.upload-popup{:href=>"#upload_asset", :id=> "upload_asset_link", :style => 'color: #666; float: left'}= t('clipped_extension.upload_asset')
