@@ -236,7 +236,5 @@ Event.addBehavior({
   'form.upload_asset': Asset.Upload,
   'a.attach_asset': Asset.Attach,
   'a.detach_asset': Asset.Detach,
-  'a.insert_asset': Asset.Insert,
-  'form.search': Asset.SearchForm,
-  '#assets_table .pagination a': Asset.Pagination
+  'a.insert_asset': Asset.Insert
 });

@@ -58,4 +58,15 @@ $(function() {
     Assets.filterAssets();
   });
 
+  $("#attach_assets").click(function(e) {
+    e.preventDefault();
+    Popup.show('attach_asset');
+    $('.close_popup').click(function(e){
+      e.preventDefault();
+      Popup.close();
+      $('#attach_asset').hide();
+    });
+  });
+
+
 });

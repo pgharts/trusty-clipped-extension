@@ -3,6 +3,7 @@ require 'acts_as_list'
 require 'uuidtools'
 require 'cloud'
 require 'paperclip'
+require 'will_paginate/array'
 
 class ClippedExtension < TrustyCms::Extension
   version TrustyCmsClippedExtension::VERSION
