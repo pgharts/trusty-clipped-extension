@@ -20,8 +20,8 @@
         .buttons
           = f.submit t("clipped_extension.upload"), :class => "button"
           = t('or')
-          %a.cancel.close_popup{:href=>"javascript:void(0)"}= t('cancel')
-          %a.attach-popup{:href=>"#attach_asset", :style => 'color: #666; float: left'}= t('clipped_extension.attach_existing')
+          %a.cancel.close_popup{:href=>"#"}= t('cancel')
+          %a#attach-popup{:href=>"#attach_asset", :style => 'color: #666; float: left'}= t('clipped_extension.attach_existing')
     #upload_holders
     
   - popups.attach_asset do

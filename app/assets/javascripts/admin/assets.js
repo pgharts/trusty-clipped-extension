@@ -78,6 +78,18 @@ $(function() {
     $('#attach_asset').hide();
     Popup.show('upload_asset');
 
+    $("#attach-popup").click(function(e) {
+      e.preventDefault();
+      Popup.close();
+      $('#upload_asset').hide();
+      Popup.show('attach_asset');
+      $('.close_popup').click(function(e){
+        e.preventDefault();
+        Popup.close();
+        $('#attach_asset').hide();
+      });
+    });
+
     $('.close_popup').click(function(e){
       e.preventDefault();
       Popup.close();
