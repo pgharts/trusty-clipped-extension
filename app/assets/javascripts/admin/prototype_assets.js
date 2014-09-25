@@ -195,7 +195,6 @@ Asset.HideListIfEmpty = function () {
 Event.addBehavior({
   'ul#attachment_fields': Asset.Sortable,
   'form.upload_asset': Asset.Upload,
-  'a.attach_asset': Asset.Attach,
   'a.detach_asset': Asset.Detach,
   'a.insert_asset': Asset.Insert
 });
