@@ -22,6 +22,37 @@ Assets = {
       Assets.removeFromList(link.parents('li.asset'));
     });
 
+    $('a.insert_asset').click(function(e){
+      e.preventDefault();
+      var part_name = $("a.tab.here").children('span').html();
+      if (part_name.indexOf(' ')) part_name = part_name.replace(' ', '-');
+      var textbox = $('#part_' + part_name + '_content');
+      var tag_parts = $(this).attr('rel').split('_');
+      var tag_name = tag_parts[0];
+      var asset_size = tag_parts[1];
+      var asset_id = tag_parts[2];
+      var radius_tag = '<r:asset:' + tag_name;
+      if (asset_size != '') radius_tag = radius_tag + ' size="' + asset_size + '"';
+      radius_tag =  radius_tag +' id="' + asset_id + '" />';
+      Assets.insertAtCursor(textbox, radius_tag);
+    });
+
+  },
+
+  insertAtCursor: function(field, insertion) {
+    if (document.selection) {  // ie
+      field.focus();
+      var sel = document.selection.createRange();
+      sel.text = insertion;
+    }
+    else if (field.selectionStart || field.selectionStart == '0') {  // moz
+      var startPos = field.selectionStart;
+      var endPos = field.selectionEnd;
+      field.value = field.value.substring(0, startPos) + insertion + field.value.substring(endPos, field.value.length);
+      field.selectionStart = field.selectionEnd = startPos + insertion.length;
+    } else {
+      field.val(field.val() + insertion);
+    }
   },
   filterAssets: function() {
     var parameters = [];

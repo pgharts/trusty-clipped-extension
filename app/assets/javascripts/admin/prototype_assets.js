@@ -59,22 +59,7 @@ Asset.Upload = Behavior.create({
 
 
 
-Asset.Insert = Behavior.create({
-  onclick: function(e) {
-    if (e) e.stop();
-    var part_name = TabControlBehavior.instances[0].controller.selected.caption.toLowerCase();
-    if (part_name.indexOf(' ')) part_name = part_name.replace(' ', '-');
-    var textbox = $('part_' + part_name + '_content');
-    var tag_parts = this.element.getAttribute('rel').split('_');
-    var tag_name = tag_parts[0];
-    var asset_size = tag_parts[1];
-    var asset_id = tag_parts[2];
-    var radius_tag = '<r:asset:' + tag_name;
-    if (asset_size != '') radius_tag = radius_tag + ' size="' + asset_size + '"';
-    radius_tag =  radius_tag +' id="' + asset_id + '" />';
-    Asset.InsertAtCursor(textbox, radius_tag);
-  }
-});
+
 
 Asset.Sortable = Behavior.create({
   initialize: function (e) {
