@@ -57,12 +57,7 @@ Asset.Upload = Behavior.create({
 // });
 
 
-Asset.Detach = Behavior.create({
-  onclick: function (e) {
-    if (e) e.stop();
-    Asset.RemoveFromList(this.element.up('li.asset'));
-  }
-});
+
 
 Asset.Insert = Behavior.create({
   onclick: function(e) {
@@ -147,19 +142,6 @@ Asset.GenerateUUID = function () {
   return s.join('');
 };
 
-
-
-
-
-Asset.RemoveFromList = function (container) {
-  var el = null;
-  if (!!(el = container.down('input.attacher'))) el.remove();
-  if (!!(el = container.down('input.pos'))) el.remove();
-  if (!!(el = container.down('input.destroyer'))) el.value = 1;
-  container.dropOut({afterFinish: Asset.HideListIfEmpty});
-  container.addClassName('detached');
-}
-
 Asset.AddPlaceholder = function (title, image, contents) {
   var placeholder = document.createElement('li').addClassName('asset').addClassName('waiting');
   if (contents) placeholder.insert(contents);
@@ -195,6 +177,5 @@ Asset.HideListIfEmpty = function () {
 Event.addBehavior({
   'ul#attachment_fields': Asset.Sortable,
   'form.upload_asset': Asset.Upload,
-  'a.detach_asset': Asset.Detach,
   'a.insert_asset': Asset.Insert
 });

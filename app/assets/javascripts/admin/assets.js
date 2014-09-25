@@ -1,5 +1,26 @@
 Assets = {
   attachEvents: function() {
+    $('a.attach_asset').click(function(e){
+      e.preventDefault();
+      var link = $(this);
+      var container = link.parents('li.asset');
+      var title = link.parents('div.title').html();
+      var image = link.parents('img');
+      container.addClass('waiting');
+      $.ajax({
+        url: link.attr('href'),
+        success: function(data, textStatus, jqXHR) {
+          container.removeClass('waiting');
+          Assets.addToList(data);
+        }
+      });
+    });
+
+    $('a.detach_asset').click(function(e){
+      e.preventDefault();
+      var link = $(this);
+      Assets.removeFromList(link.parents('li.asset'));
+    });
 
   },
   filterAssets: function() {
@@ -43,6 +64,13 @@ Assets = {
 
     //Assets.makeSortable(list);
 
+  },
+  removeFromList: function(container) {
+    container.children('input.attacher').remove();
+    container.children('input.pos').remove();
+    container.children('input.destroyer').val(1);
+    container.fadeOut();
+    container.addClass('detached');
   },
   showListIfHidden: function() {
     var list = $('#attachment_fields');
@@ -122,20 +150,6 @@ $(function() {
     });
   });
 
-  $('a.attach_asset').click(function(e){
-    e.preventDefault();
-    var link = $(this);
-    var container = link.parents('li.asset');
-    var title = link.parents('div.title').html();
-    var image = link.parents('img');
-    container.addClass('waiting');
-    $.ajax({
-      url: link.attr('href'),
-      success: function(data, textStatus, jqXHR) {
-        container.removeClass('waiting');
-        Assets.addToList(data);
-      }
-    });
-  });
+  Assets.attachEvents();
 
 });
