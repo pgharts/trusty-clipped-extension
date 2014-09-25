@@ -56,28 +56,6 @@ Asset.Upload = Behavior.create({
 //   }
 // });
 
-// ajax-based page attachment is a slightly slower but probably more robust option
-//
-Asset.Attach = Behavior.create({
-  onclick: function (e) {
-    if (e) e.stop();
-    var container = this.element.up('li.asset');
-    var title = container.down('div.title').innerHTML;
-    var image = container.down('img');
-    var placeholder = Asset.AddPlaceholder(title, image);
-    container.addClassName('waiting');
-    new Ajax.Request(this.element.href, {
-      asynchronous: true,
-      evalScripts: false,
-      method: 'get',
-      onSuccess: function(transport) {
-        container.removeClassName('waiting');
-        placeholder.remove();
-        Asset.AddToList(transport.responseText);
-      }
-    });
-  }
-});
 
 Asset.Detach = Behavior.create({
   onclick: function (e) {
@@ -171,14 +149,7 @@ Asset.GenerateUUID = function () {
 
 
 
-Asset.AddToList = function (html) {
-  var list = $('attachment_fields');
-  list.insert(html);
-  Asset.ShowListIfHidden();
-  Asset.Notify('Save page to commit changes');
-  Event.addBehavior.reload();   // #TODO something a bit more specific would be nice here
-  Asset.MakeSortable(list);
-}
+
 
 Asset.RemoveFromList = function (container) {
   var el = null;
@@ -208,17 +179,7 @@ Asset.AllWaiting = function (container) {
   container.select('li.asset').each(function (el) { el.addClassName('waiting'); });
 }
 
-Asset.Notify = function (message) {
-  $('attachment_list').down('span.message').update(message).addClassName('important');
-}
 
-Asset.ShowListIfHidden = function () {
-  var list = $('attachment_fields');
-  if (list.hasClassName('empty')) {
-    list.removeClassName('empty');
-    // list.slideDown();
-  }
-}
 
 Asset.HideListIfEmpty = function () {
   var list = $('attachment_fields');

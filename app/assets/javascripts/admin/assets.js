@@ -1,4 +1,7 @@
 Assets = {
+  attachEvents: function() {
+
+  },
   filterAssets: function() {
     var parameters = [];
     var url = $("#filesearchform").attr('action');
@@ -28,7 +31,29 @@ Assets = {
   },
   updateTable: function(html) {
     $("#assets_table").html(html);
+  },
+  addToList: function(html){
+    var list = $('#attachment_fields');
+    list.append(html);
+    Assets.showListIfHidden();
+    Assets.notify('Save page to commit changes');
+    Assets.attachEvents();
+    // I'm not sure what Sortable does and can't find any example of
+    // its use in current Radiant, so I'm going to comment it out for now.
+
+    //Assets.makeSortable(list);
+
+  },
+  showListIfHidden: function() {
+    var list = $('#attachment_fields');
+    if (list.hasClass('empty')) {
+      list.removeClass('empty');
+    }
+  },
+  notify: function(message){
+    $('#attachment_list span.message').html(message).addClass('important');
   }
+
 };
 
 
@@ -90,10 +115,26 @@ $(function() {
       });
     });
 
-    $('.close_popup').click(function(e){
-      e.preventDefault();
-      Popup.close();
-      $('#upload_asset').hide();
+  $('.close_popup').click(function(e){
+    e.preventDefault();
+    Popup.close();
+    $('#upload_asset').hide();
+    });
+  });
+
+  $('a.attach_asset').click(function(e){
+    e.preventDefault();
+    var link = $(this);
+    var container = link.parents('li.asset');
+    var title = link.parents('div.title').html();
+    var image = link.parents('img');
+    container.addClass('waiting');
+    $.ajax({
+      url: link.attr('href'),
+      success: function(data, textStatus, jqXHR) {
+        container.removeClass('waiting');
+        Assets.addToList(data);
+      }
     });
   });
 
