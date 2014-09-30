@@ -8,20 +8,23 @@
       = form_for([:admin, Asset.new], :html => {:method => 'post', :multipart => true, :class => 'upload_asset'}) do |f|
         = hidden_field_tag "for_attachment", 1
         = hidden_field_tag "page_id", @page.id
-        
-        %p
-          = f.label :asset, t("clipped_extension.choose_file")
-          = f.file_field :asset, :class => 'file', :multiple => true
-        
-        %p
-          = f.label :title, t("clipped_extension.alt_text_or_title")
-          = f.text_field :title, :class => "textbox big"
-        
-        .buttons
-          = f.submit t("clipped_extension.upload"), :class => "button"
-          = t('or')
-          %a.cancel.close_popup{:href=>"#"}= t('cancel')
-          %a#attach-popup{:href=>"#attach_asset", :style => 'color: #666; float: left'}= t('clipped_extension.attach_existing')
+        #upload-controls
+          %p
+            = f.label :asset, t("clipped_extension.choose_file")
+            = f.file_field :asset, :class => 'file', :multiple => true
+          %p
+            %a#attach-popup{:href=>"#attach_asset", :style => 'color: #666; font-size: .8em'}= t('clipped_extension.attach_existing')
+        #update-controls
+          %p
+            %strong
+              = f.label :title, t("clipped_extension.alt_text_or_title")
+          %p
+            = f.text_field :title, :class => "textbox big"
+
+          .buttons
+            = f.submit "Set Title", :class => "button"
+            = t('or')
+            %a.cancel.close_popup{:href=>"#"}= 'Continue'
     #upload_holders
     
   - popups.attach_asset do

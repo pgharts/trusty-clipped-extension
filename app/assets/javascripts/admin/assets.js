@@ -39,12 +39,26 @@ Assets = {
     $('#asset_asset').fileupload({
       done: function (e, data) {
         Assets.addToList($(data.result));
+        Assets.activateUpload();
       }
     });
     $('form.upload_asset').submit(function(e){
       e.preventDefault();
 
     });
+  },
+
+  activateUpload: function(){
+    $('#upload-controls').hide();
+    $('#update-controls').show();
+    $('#asset_title').prop( "disabled", false );
+    $('#new_asset input[name="commit"]').prop( "disabled", false );
+  },
+  activateUpdate: function() {
+    $('#upload-controls').show();
+    $('#update-controls').hide();
+    $('#asset_title').prop( "disabled", true );
+    $('#new_asset input[name="commit"]').prop( "disabled", true );
   },
 
   insertAtCursor: function(field, insertion) {
@@ -168,6 +182,7 @@ $(function() {
     e.preventDefault();
     Popup.close();
     $('#attach_asset').hide();
+    Assets.activateUpdate();
     Popup.show('upload_asset');
 
     $("#attach-popup").click(function(e) {
