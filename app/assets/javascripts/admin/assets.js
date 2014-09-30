@@ -36,7 +36,15 @@ Assets = {
       radius_tag =  radius_tag +' id="' + asset_id + '" />';
       Assets.insertAtCursor(textbox, radius_tag);
     });
+    $('#asset_asset').fileupload({
+      done: function (e, data) {
+        Assets.addToList($(data.result));
+      }
+    });
+    $('form.upload_asset').submit(function(e){
+      e.preventDefault();
 
+    });
   },
 
   insertAtCursor: function(field, insertion) {
