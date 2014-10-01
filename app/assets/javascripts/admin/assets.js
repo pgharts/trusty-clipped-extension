@@ -36,16 +36,7 @@ Assets = {
       radius_tag =  radius_tag +' id="' + asset_id + '" />';
       Assets.insertAtCursor(textbox, radius_tag);
     });
-    $('#asset_asset').fileupload({
-      done: function (e, data) {
-        Assets.addToList($(data.result));
-        Assets.activateUpload();
-      }
-    });
-    $('form.upload_asset').submit(function(e){
-      e.preventDefault();
 
-    });
   },
 
   activateUpload: function(){
@@ -202,6 +193,39 @@ $(function() {
     Popup.close();
     $('#upload_asset').hide();
     });
+  });
+
+  $('#update_asset').submit(function(e){
+    e.preventDefault();
+    $("#update-asset").attr("disabled", true);
+    $('#update-status').show();
+    $.ajax({
+      method: 'put',
+      url: $(this).attr('action') + $("#asset_id").val(),
+      data: $(this).serialize(),
+      complete: function(data, textStatus, jqXHR) {
+        Popup.close();
+        $('#upload_asset').hide();
+        $('#update-status').hide();
+        $("#update-asset").attr("disabled", false);
+        $('#update_asset').trigger("reset");
+      }
+    });
+  });
+
+  $('#asset_asset').fileupload({
+    add: function(e, data) {
+      $("#asset_asset").attr("disabled", true);
+      $('#upload-status').show();
+      data.submit();
+    },
+    done: function (e, data) {
+      $("#asset_id").val($(data.result).find(".attacher").val());
+      Assets.addToList($(data.result));
+      Assets.activateUpload();
+      $("#asset_asset").attr("disabled", false);
+      $('#upload-status').hide();
+    }
   });
 
   Assets.attachEvents();
