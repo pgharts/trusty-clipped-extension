@@ -37,6 +37,18 @@ Assets = {
       Assets.insertAtCursor(textbox, radius_tag);
     });
 
+    $("a[rel='next'], a[rel='prev'], a[rel='start']").click(function(e){
+      e.preventDefault();
+      $.ajax({
+        method: 'get',
+        url: $(this).attr('href') + '&pp=20',
+        complete: function(data, textStatus, jqXHR) {
+          Assets.updateTable(data.responseText);
+          Assets.attachEvents();
+        }
+      });
+    });
+
   },
 
   activateUpload: function(){

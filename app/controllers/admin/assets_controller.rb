@@ -19,7 +19,7 @@ class Admin::AssetsController < Admin::ResourceController
 
       format.js {
         @page = Page.find_by_id(params[:page_id])
-        render :partial => 'asset_table', :locals => {:with_pagination => !!@page}
+        render :partial => 'asset_table', :locals => {:with_pagination => true}
       }
       format.html { render }
     end

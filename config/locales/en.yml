@@ -26,7 +26,7 @@ en:
     actions: Actions
     all: 'All'
     all_thumbnails_refreshed: 'All asset thumbnails refreshed.'
-    alt_text_or_title: 'Set Asset Alt-Text or Title <span class="hint">(optional)</span>'
+    alt_text_or_title: 'Set Asset Title <span class="hint">(optional)</span>'
     asset: 'Asset'
     asset_edit_title: 'Edit Asset'
     asset_errors: 'Sorry. {{errors}}'
