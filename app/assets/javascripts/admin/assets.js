@@ -37,7 +37,7 @@ Assets = {
       Assets.insertAtCursor(textbox, radius_tag);
     });
 
-    $("a[rel='next'], a[rel='prev'], a[rel='start']").click(function(e){
+    $(".pagination a").click(function(e){
       e.preventDefault();
       $.ajax({
         method: 'get',
