@@ -41,7 +41,7 @@ Assets = {
       e.preventDefault();
       $.ajax({
         method: 'get',
-        url: $(this).attr('href') + '&pp=20',
+        url: $(this).attr('href') + Assets.assetFilterParameters(),
         complete: function(data, textStatus, jqXHR) {
           Assets.updateTable(data.responseText);
           Assets.attachEvents();
@@ -49,6 +49,26 @@ Assets = {
       });
     });
 
+  },
+
+  assetFilterParameters: function() {
+    var parameters = [];
+    if ($('#filesearchforminput').val() !== '') {
+      parameters.push(['search', $('#filesearchforminput').val()]);
+    }
+    var filters = [];
+    var url_params = "";
+    $('a.selective.pressed').each(function(){
+      filters.push($(this).attr('rel'));
+    });
+
+    if (filters.length > 0) {parameters.push(['filter', filters.toString()])}
+
+    for(var i = 0; i < parameters.length; i++) {
+      if (i > 0) {url_params = url_params + '&'}
+      url_params = url_params + parameters[i][0] + '=' + parameters[i][1];
+    }
+    return url_params + '&pp=20';
   },
 
   activateUpload: function(){
@@ -80,25 +100,10 @@ Assets = {
     }
   },
   filterAssets: function() {
-    var parameters = [];
     var url = $("#filesearchform").attr('action');
+    var parameters = Assets.assetFilterParameters();
 
-    if ($('#filesearchforminput').val() !== '') {
-      parameters.push(['search', $('#filesearchforminput').val()]);
-    }
-    var filters = [];
-    $('a.selective.pressed').each(function(){
-      filters.push($(this).attr('rel'));
-    });
-
-    if (filters.length > 0) {parameters.push(['filter', filters.toString()])}
-
-    for(var i = 0; i < parameters.length; i++) {
-      if (i > 0) {url = url + '&'}
-      else {url = url + "?"}
-      url = url + parameters[i][0] + '=' + parameters[i][1];
-    }
-
+    url = url + "?" + parameters;
     $.ajax({
       url: url,
       complete: function(data, textStatus, jqXHR) {
@@ -108,6 +113,7 @@ Assets = {
   },
   updateTable: function(html) {
     $("#assets_table").html(html);
+    Assets.attachEvents();
   },
   addToList: function(html){
     var list = $('#attachment_fields');
@@ -160,6 +166,7 @@ $(function() {
       $(type_check).prop('checked', true);
     }
     Assets.filterAssets();
+    Assets.attachEvents();
 
   });
 
@@ -171,11 +178,13 @@ $(function() {
       $('input.selective').each(function() { $(this).prop('checked', false); });
       element.addClass('pressed');
       Assets.filterAssets();
+      Assets.attachEvents();
     }
   });
 
   $('#filesearchforminput').keyup(function(){
     Assets.filterAssets();
+    Assets.attachEvents();
   });
 
   $("#attach_assets").click(function(e) {
