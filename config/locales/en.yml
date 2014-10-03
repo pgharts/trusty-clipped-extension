@@ -90,7 +90,7 @@ en:
     upload: 'Upload'
     upload_asset: 'Upload Asset'
 
-  config:
+  trusty_config:
     assets:
       additional_thumbnails: 'Additional Thumbnails'
       content_types: 'Content Types'

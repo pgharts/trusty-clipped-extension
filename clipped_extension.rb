@@ -33,7 +33,7 @@ class ClippedExtension < TrustyCms::Extension
       admin.page.edit.add :form, 'assets', :after => :edit_page_parts                    # adds the asset-attachment picker to the page edit view
       admin.page.edit.add :main, 'asset_popups', :after => :edit_popups                  # adds the asset-attachment picker to the page edit view
       admin.page.edit.asset_popups.concat %w{upload_asset attach_asset}
-      admin.configuration.show.add :config, 'admin/configuration/clipped_show', :after => 'defaults'
+      admin.configuration.show.add :trusty_config, 'admin/configuration/clipped_show', :after => 'defaults'
       admin.configuration.edit.add :form,   'admin/configuration/clipped_edit', :after => 'edit_defaults'
     
       if TrustyCms::Config.table_exists? && TrustyCms::config["paperclip.command_path"]    # This is needed for testing if you are using mod_rails
