@@ -163,6 +163,17 @@ $(function() {
 
   });
 
+  $('a.deselective').click(function(e){
+    e.preventDefault();
+    var element = $(this);
+    if(!element.hasClass('pressed')) {
+      $('a.selective').each(function() { $(this).removeClass('pressed'); });
+      $('input.selective').each(function() { $(this).prop('checked', false); });
+      element.addClass('pressed');
+      Assets.filterAssets();
+    }
+  });
+
   $('#filesearchforminput').keyup(function(){
     Assets.filterAssets();
   });
