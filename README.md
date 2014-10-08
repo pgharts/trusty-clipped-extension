@@ -1,6 +1,6 @@
 # TrustyCms Clipped Extension
 
-[![Build Status](https://secure.travis-ci.org/radiant/radiant-clipped-extension.png)](http://travis-ci.org/radiant/radiant-clipped-extension)
+[![Build Status](https://secure.travis-ci.org/radiant-clipped-extension.png)](http://travis-ci.org/radiant/radiant-clipped-extension)
 
 Asset management for TrustyCms CMS.
 
@@ -8,22 +8,21 @@ The Clipped extension comes bundled with the TrustyCms gem but may be updated se
 
 Please file bugs and feature requests on [Github][issues]. If you have questions regarding usage ask on the [mailing list][mailing-list].
 
-[issues]: https://github.com/radiant/radiant-clipped-extension/issues
-[mailing-list]: https://groups.google.com/forum/?hl=en#!forum/radiantcms
+[issues]: https://github.com/pgharts/trusty-clipped-extension/issues
 
 ## Features
 
 * Concurrent uploads
 * Automatic thumbnail generation
-  * requiers ImageMagick for images
-  * requiers FFmpeg for videos
-  * requiers Ghostscript for PDFs
+  * requires ImageMagick for images
+  * requires FFmpeg for videos
+  * requires Ghostscript for PDFs
 * In-page and dedicated management interfaces
 * Easily to extended with new asset types and processors
 
 ## Installation
 
-If you installed the TrustyCms gem then you already have Clipped installed. You can upgrade to a newer version using `bundle update radiant-clipped-extension`.
+If you installed the TrustyCms gem then you already have Clipped installed. You can upgrade to a newer version using `bundle update trusty-clipped-extension`.
 
 Installation of the optional post-processors varies by system but are likely available through your package manager.
 
@@ -50,7 +49,7 @@ If the post-processors are not in your `PATH` or you're running Passenger you mi
 
 ## Configuration
 
-The clipped extension is configured in the usual way, but only its minor settings are exposed in the admin interface. The more architectural settings shouldn't be changed at runtime and some of them will require a lot of sorting out if they're changed at all, so those are only accessible through the console or by editing the database. Eventually they will be made part of the initial radiant installation process.
+The clipped extension is configured in the usual way, but only its minor settings are exposed in the admin interface. The more architectural settings shouldn't be changed at runtime and some of them will require a lot of sorting out if they're changed at all, so those are only accessible through the console or by editing the database. Eventually they will be made part of the initial trusty-cms installation process.
 
 ### Structural settings
 
@@ -186,5 +185,7 @@ Pull requests with working tests are preferred and have a greater chance of bein
 * Keith Bingman
 * John Long
 * William Ross
+* Eric Sipple
+
 
 Copyright 2011 the TrustyCms team. Released under the same terms as TrustyCms.
