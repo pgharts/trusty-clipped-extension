@@ -1,6 +1,6 @@
 # TrustyCms Clipped Extension
 
-[![Build Status](https://secure.travis-ci.org/radiant-clipped-extension.png)](http://travis-ci.org/radiant/radiant-clipped-extension)
+[![Build Status](https://secure.travis-ci.org/radiant/radiant-clipped-extension.png)](http://travis-ci.org/radiant/radiant-clipped-extension)
 
 Asset management for TrustyCms CMS.
 
