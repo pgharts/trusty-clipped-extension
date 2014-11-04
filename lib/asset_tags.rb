@@ -16,13 +16,8 @@ module AssetTags
     <pre><code><r:asset [name="asset name"]>...</r:asset></code></pre>
   }    
   tag 'asset' do |tag|
-    tag.locals.asset = find_asset unless tag.attr.empty?
-    begin
+    tag.locals.asset = find_asset(tag, tag.attr) unless tag.attr.empty?
       tag.expand
-    rescue Paperclip::StyleError => e
-      Rails.logger.warn "style processing error with asset ##{tag.locals.asset.id}: #{e}"
-      raise TagError, e
-    end
   end
 
   desc %{
@@ -233,7 +228,7 @@ module AssetTags
     raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.has_style?(size)
     options['alt'] ||= tag.locals.asset.title
     url = tag.locals.asset.thumbnail(size)
-    image_tag url, options rescue nil
+    ActionController::Base.helpers.image_tag(url, options)
   end
   
   desc %{
