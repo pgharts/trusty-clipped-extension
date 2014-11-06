@@ -26,7 +26,7 @@ Assets = {
       e.preventDefault();
       var part_name = $("a.tab.here").children('span').html();
       if (part_name.indexOf(' ')) part_name = part_name.replace(' ', '-');
-      var textbox = $('#part_' + part_name + '_content');
+      var part_id = 'part_' + part_name + '_content';
       var tag_parts = $(this).attr('rel').split('_');
       var tag_name = tag_parts[0];
       var asset_size = tag_parts[1];
@@ -34,7 +34,8 @@ Assets = {
       var radius_tag = '<r:asset:' + tag_name;
       if (asset_size != '') radius_tag = radius_tag + ' size="' + asset_size + '"';
       radius_tag =  radius_tag +' id="' + asset_id + '" />';
-      Assets.insertAtCursor(textbox, radius_tag);
+      Assets.insertAtCursor(part_id, radius_tag);
+
     });
 
     $(".pagination a").click(function(e){
@@ -84,19 +85,14 @@ Assets = {
     $('#new_asset input[name="commit"]').prop( "disabled", true );
   },
 
-  insertAtCursor: function(field, insertion) {
-    if (document.selection) {  // ie
-      field.focus();
-      var sel = document.selection.createRange();
-      sel.text = insertion;
-    }
-    else if (field.selectionStart || field.selectionStart == '0') {  // moz
-      var startPos = field.selectionStart;
-      var endPos = field.selectionEnd;
-      field.value = field.value.substring(0, startPos) + insertion + field.value.substring(endPos, field.value.length);
-      field.selectionStart = field.selectionEnd = startPos + insertion.length;
+  insertAtCursor: function(part_id, insertion) {
+    if (CKEDITOR.instances[part_id].mode == 'wysiwyg') {
+      CKEDITOR.instances[part_id].insertText( insertion );
     } else {
-      field.val(field.val() + insertion);
+      var textbox = $("textarea.cke_source[title~=" + part_id +"]");
+      var caretPos = textbox[0].selectionStart;
+      var textAreaTxt = textbox.val();
+      textbox.val(textAreaTxt.substring(0, caretPos) + insertion + textAreaTxt.substring(caretPos) );
     }
   },
   filterAssets: function() {
