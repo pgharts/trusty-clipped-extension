@@ -14,6 +14,3 @@
     = pagination_for @assets, :depaginate => false
     %ul
       %li= link_to((image('upload') + ' ' + t('clipped_extension.upload_asset')), new_admin_asset_path)
-      - if current_user.admin?
-        %li
-          = link_to t('clipped_extension.regenerate_thumbnails'), refresh_admin_assets_path
