@@ -2,7 +2,7 @@ module TrustyCmsClippedExtension
   VERSION     = "1.0.2"
   SUMMARY     = %q{Assets for TrustyCms CMS}
   DESCRIPTION = %q{Asset-management derived from Keith Bingman's Paperclipped extension.}
-  URL         = "http://radiantcms.org"
-  AUTHORS     = ["Keith Bingman", "Benny Degezelle", "William Ross", "John W. Long", "John Muhl"]
-  EMAIL       = ["radiant@radiantcms.org"]
+  URL         = "https://github.com/pgharts/trusty-clipped-extension"
+  AUTHORS     = ["Keith Bingman", "Benny Degezelle", "William Ross", "John W. Long", "John Muhl", "Eric Sipple"]
+  EMAIL       = ["webfeedback@trustarts.org"]
 end

@@ -33,7 +33,7 @@ Asset.Upload = Behavior.create({
 });
 
 
-// this local attachment method works and is much quicker, but it's fragile and doesn't notice radiant configuration changes
+// this local attachment method works and is much quicker, but it's fragile and doesn't notice Trusty configuration changes
 // better to bounce off the server, provided it can be made responsive enough.
 
 // Asset.Attach = Behavior.create({

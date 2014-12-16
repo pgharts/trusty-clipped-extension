@@ -118,7 +118,7 @@ Assets = {
     Assets.notify('Save page to commit changes');
     Assets.attachEvents();
     // I'm not sure what Sortable does and can't find any example of
-    // its use in current Radiant, so I'm going to comment it out for now.
+    // its use in current Trusty, so I'm going to comment it out for now.
 
     //Assets.makeSortable(list);
 
