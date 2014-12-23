@@ -1,10 +1,3 @@
-require 'trusty-clipped-extension'
-require 'acts_as_list'
-require 'uuidtools'
-require 'trusty_cms_clipped_extension/cloud'
-require 'paperclip'
-require 'will_paginate/array'
-
 class ClippedExtension < TrustyCms::Extension
   version TrustyCmsClippedExtension::VERSION
   description TrustyCmsClippedExtension::DESCRIPTION
