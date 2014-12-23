@@ -44,7 +44,8 @@ class Asset < ActiveRecord::Base
                     :storage => TrustyCms.config["paperclip.storage"],
                     :path => TrustyCms.config["paperclip.path"],
                     :url => TrustyCms.config["paperclip.url"],
-                    :fog_credentials => TrustyCmsClippedExtension::Cloud.credentials,
+                    :fog_credentials =>
+                        TrustyCmsClippedExtension::Cloud.credentials,
                     :fog_directory => TrustyCms.config["paperclip.fog.directory"],
                     :fog_public => TrustyCms.config["paperclip.fog.public?"] || true,
                     :fog_host => TrustyCmsClippedExtension::Cloud.host
