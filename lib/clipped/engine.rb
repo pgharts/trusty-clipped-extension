@@ -9,7 +9,7 @@ module Clipped
     paths["app/helpers"] = []
 
     initializer "trusty_cms.assets.precompile" do |app|
-      app.config.assets.precompile += %w(admin/assets.css assets_admin.js)
+      app.config.assets.precompile += %w(admin/assets.css admin/assets_admin.js)
     end
 
   end
