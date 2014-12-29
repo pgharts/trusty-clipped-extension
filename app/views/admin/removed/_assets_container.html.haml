@@ -1,7 +1,5 @@
 - @stylesheets << 'admin/assets'
-= javascript_include_tag 'ZeroClipboard'
-= javascript_include_tag 'admin/assets'
-= javascript_include_tag 'admin/dragdrop'
+= javascript_include_tag 'admin/assets_admin'
 
 #assets-container
   #asset-tabs
@@ -23,7 +21,6 @@
         - asset_tabs.bucket_tab do
           %a.asset-tab.here{ :href => "#" }
             = t("clipped_extension.bucket")
-      
     - if @page && !@page.new_record? 
       - render_region :asset_panes do |asset_panes|
 
@@ -43,7 +40,6 @@
                 != t("clipped_extension.asset_page_upload_note")
             = render :partial => "admin/assets/upload_to_page"
             .clear
-          
         - asset_panes.search do
           #search-assets.pane
             - form_tag do
