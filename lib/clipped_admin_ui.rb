@@ -1,12 +1,9 @@
 module ClippedAdminUI
 
  def self.included(base)
-   base.class_eval do
-
+   base.class_eval {
       attr_accessor :asset
       alias_method :assets, :asset
-      
-      protected
 
         def load_default_asset_regions
           OpenStruct.new.tap do |asset|
@@ -25,8 +22,7 @@ module ClippedAdminUI
             asset.remove = asset.index
           end
         end
-    end
-    
+   }
   end
 end
 
