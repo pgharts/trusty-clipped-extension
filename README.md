@@ -1,5 +1,7 @@
 # TrustyCms Clipped Extension
 
+[![Gem Version](https://badge.fury.io/rb/trusty-clipped-extension.svg)](http://badge.fury.io/rb/trusty-clipped-extension)
+
 [![Build Status](https://secure.travis-ci.org/radiant/radiant-clipped-extension.png)](http://travis-ci.org/radiant/radiant-clipped-extension)
 
 Asset management for TrustyCms CMS.
