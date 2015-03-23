@@ -13,10 +13,10 @@ Gem::Specification.new do |s|
   s.description = TrustyCmsClippedExtension::DESCRIPTION
 
   s.add_dependency "acts_as_list", "0.4.0"
-  s.add_dependency "paperclip",    "~> 4.2.0"
-  s.add_dependency "uuidtools",    "~> 2.1.2"
-  s.add_dependency "cocaine",      "~> 0.5.3"
-  s.add_dependency "trusty-cms",   "~> 1.1"
+  s.add_dependency "paperclip",    "~> 4.2"
+  s.add_dependency "uuidtools",    "~> 2.1"
+  s.add_dependency "cocaine",      "~> 0.5"
+  s.add_dependency "trusty-cms",   "~> 1.2"
 
   ignores = if File.exist?('.gitignore')
     File.read('.gitignore').split("\n").inject([]) {|a,p| a + Dir[p] }
