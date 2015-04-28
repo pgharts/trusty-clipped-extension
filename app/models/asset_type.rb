@@ -48,9 +48,9 @@ class AssetType
 
   def icon(style_name='icon')
     if File.exist?(Rails.root + "public/images/admin/assets/#{icon_name}_#{style_name.to_s}.png")
-      return "/images/admin/assets/#{icon_name}_#{style_name.to_s}.png"
+      return "/assets/admin/#{icon_name}_#{style_name.to_s}.png"
     else
-      return "/images/admin/assets/#{icon_name}_icon.png"
+      return "/assets/admin/#{icon_name}_icon.png"
     end
   end
   

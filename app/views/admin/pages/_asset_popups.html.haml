@@ -13,7 +13,7 @@
             = f.label :asset, t("clipped_extension.choose_file")
             = f.file_field :asset, :class => 'file', :multiple => true
             #upload-status{:style => 'display: none;'}
-              %img{:src => "/images/admin/spinner.gif"}
+              %img{:src => "/assets/admin/spinner.gif"}
           %p
             %a#attach-popup{:href=>"#attach_asset", :style => 'color: #666; font-size: .8em'}= t('clipped_extension.attach_existing')
 
@@ -33,7 +33,7 @@
           .buttons
             = button_tag "Set Title", {:id => 'update-asset', :class => "button"}
             #update-status{:style => 'display: none;'}
-              %img{:src => "/images/admin/spinner.gif"}
+              %img{:src => "/assets/admin/spinner.gif"}
             = t('or')
             %a.close_popup{:href=>"#"}= 'Continue'
     #upload_holders
