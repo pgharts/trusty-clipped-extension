@@ -6,7 +6,7 @@
 - css_class = "#{asset_type} asset"
 - css_class += ' unsaved' if attachment.new_record?
 
-%li{:class => css_class, :id => "attachment_#{asset.uuid}"}
+%li{:class => css_class, :id => "attachment_#{asset.uuid}", data: {toggle: "tooltip", placement: "left"}, title: "Asset ID: #{asset.id}"}
   = fields_for :page, @page do |f|
     = f.fields_for :page_attachments, attachment, :child_index => asset.uuid do |paf|
       - if attachment.new_record?
@@ -15,7 +15,7 @@
         = paf.hidden_field :_destroy, :class => 'destroyer'
       = paf.hidden_field :position, :class => 'pos'
   .front
-    .thumbnail= image_tag asset.thumbnail(:thumbnail)
+    .thumbnail= image_tag asset.thumbnail(:thumbnail), alt: "Asset ID: #{asset.id}"
   .back
     .title= asset.title
     %ul.actions
