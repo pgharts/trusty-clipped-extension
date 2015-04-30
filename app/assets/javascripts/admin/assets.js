@@ -57,6 +57,11 @@ Assets = {
     if ($('#filesearchforminput').val() !== '') {
       parameters.push(['search', $('#filesearchforminput').val()]);
     }
+
+    if ($('#page_id').val() !== undefined) {
+      parameters.push(['page_id', $('#page_id').val()]);
+    }
+
     var filters = [];
     var url_params = "";
     $('a.selective.pressed').each(function(){

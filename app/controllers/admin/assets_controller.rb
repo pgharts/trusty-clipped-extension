@@ -3,7 +3,9 @@ class Admin::AssetsController < Admin::ResourceController
   
   def index
     assets = Asset.scoped({:order => "created_at DESC"})
-    
+
+    @page = Page.find(params[:page_id]) if params[:page_id]
+
     @term = params[:search] || ''
     assets = assets.matching(@term) if @term && !@term.blank?
     
