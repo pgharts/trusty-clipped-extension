@@ -26,6 +26,7 @@ Assets = {
       e.preventDefault();
       var part_name = $("a.tab.here").children('span').html();
       if (part_name.indexOf(' ')) part_name = part_name.replace(' ', '-');
+      part_name = part_name.replace('_', '-');
       var part_id = 'part_' + part_name + '_content';
       var tag_parts = $(this).attr('rel').split('_');
       var tag_name = tag_parts[0];
