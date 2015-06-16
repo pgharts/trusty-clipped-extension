@@ -34,8 +34,8 @@ class AssetType
     Asset.send :define_method, "#{name}?".intern do this.mime_types.include?(asset_content_type) end 
     Asset.send :define_class_method, "#{name}_condition".intern do this.condition; end
     Asset.send :define_class_method, "not_#{name}_condition".intern do this.non_condition; end
-    Asset.send :scope, plural.to_sym, :conditions => condition
-    Asset.send :scope, "not_#{plural}".to_sym, :conditions => non_condition
+    Asset.send :scope, plural.to_sym, -> {where(:conditions => condition)}
+    Asset.send :scope, "not_#{plural}".to_sym, -> {where(:conditions => non_condition)}
     
     self.define_radius_tags
     @@types.push self

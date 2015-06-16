@@ -2,7 +2,7 @@ class Admin::AssetsController < Admin::ResourceController
   paginate_models(:per_page => 50)
   
   def index
-    assets = Asset.scoped({:order => "created_at DESC"})
+    assets = Asset.order("created_at DESC")
 
     @page = Page.find(params[:page_id]) if params[:page_id]
 

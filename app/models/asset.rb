@@ -8,7 +8,7 @@ class Asset < ActiveRecord::Base
   belongs_to :created_by, :class_name => 'User'
   belongs_to :updated_by, :class_name => 'User'
 
-  default_scope :order => "created_at DESC"
+  default_scope {order("created_at DESC")}
 
   scope :latest, lambda { |limit|
     { :order => "created_at DESC", :limit => limit }
@@ -23,7 +23,7 @@ class Asset < ActiveRecord::Base
     { :conditions => ["LOWER(assets.asset_file_name) LIKE (:term) OR LOWER(title) LIKE (:term) OR LOWER(caption) LIKE (:term)", {:term => "%#{term.downcase}%" }] }
   }
 
-  scope :except, lambda { |assets|
+  scope :excepting, lambda { |assets|
     if assets.any?
       assets = assets.split(',') if assets.is_a?(String)
       asset_ids = assets.first.is_a?(Asset) ? assets.map(&:id) : assets
