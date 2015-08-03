@@ -10,6 +10,8 @@ class Asset < ActiveRecord::Base
 
   default_scope {order("created_at DESC")}
 
+  attr_accessible :title, :asset, :caption
+
   scope :latest, lambda { |limit|
     { :order => "created_at DESC", :limit => limit }
   }
