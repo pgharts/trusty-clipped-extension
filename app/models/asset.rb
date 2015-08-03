@@ -13,23 +13,23 @@ class Asset < ActiveRecord::Base
   attr_accessible :title, :asset, :caption
 
   scope :latest, lambda { |limit|
-    { :order => "created_at DESC", :limit => limit }
+    order("created_at DESC").limit(limit)
   }
 
   scope :of_types, lambda { |types|
     mimes = AssetType.slice(*types).map(&:mime_types).flatten
-    { :conditions => ["asset_content_type IN (#{mimes.map{'?'}.join(',')})", *mimes] }
+    where(["asset_content_type IN (#{mimes.map{'?'}.join(',')})", *mimes])
   }
 
   scope :matching, lambda { |term|
-    { :conditions => ["LOWER(assets.asset_file_name) LIKE (:term) OR LOWER(title) LIKE (:term) OR LOWER(caption) LIKE (:term)", {:term => "%#{term.downcase}%" }] }
+    where(["LOWER(assets.asset_file_name) LIKE (:term) OR LOWER(title) LIKE (:term) OR LOWER(caption) LIKE (:term)", {:term => "%#{term.downcase}%" }])
   }
 
   scope :excepting, lambda { |assets|
     if assets.any?
       assets = assets.split(',') if assets.is_a?(String)
       asset_ids = assets.first.is_a?(Asset) ? assets.map(&:id) : assets
-      { :conditions => ["assets.id NOT IN(#{asset_ids.map{ '?' }.join(',')})", *asset_ids] }
+      where(["assets.id NOT IN(#{asset_ids.map{ '?' }.join(',')})", *asset_ids])
     else
       {}
     end
