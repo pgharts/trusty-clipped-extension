@@ -3,6 +3,8 @@ class PageAttachment < ActiveRecord::Base
   belongs_to :page
   attr_accessor :selected
 
+  attr_accessible :asset, :page, :asset_id, :page_id
+
   accepts_nested_attributes_for :asset
   
   acts_as_list :scope => :page_id
