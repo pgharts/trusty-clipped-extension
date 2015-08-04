@@ -1,5 +1,5 @@
 module TrustyCmsClippedExtension
-  VERSION     = "2.0.1-beta"
+  VERSION     = "2.0.2-beta"
   SUMMARY     = %q{Assets for TrustyCms CMS}
   DESCRIPTION = %q{Asset-management derived from Keith Bingman's Paperclipped extension.}
   URL         = "https://github.com/pgharts/trusty-clipped-extension"
