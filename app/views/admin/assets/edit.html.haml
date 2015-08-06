@@ -11,7 +11,7 @@
         = render :partial => "form", :locals => { :f => f }
         
         %div.content
-          %p
+          %fieldset
             %label.filename
               = "#{t("clipped_extension.filename")}: #{@asset.asset_file_name unless @asset.new_record?}"
           %p.asset
@@ -20,7 +20,7 @@
 
           = updated_stamp @asset
         
-        %p.upload
+        %fieldset.upload
           %label.upload
             = t("clipped_extension.replace_file")
           = f.file_field :asset, :class => "", :style => "width: 100%"
@@ -33,7 +33,7 @@
   
   - main.edit_regenerate do
     - if current_user.admin? or current_user.designer?
-      %p= t("clipped_extension.regenerate_thumbnails")
+      %fieldset= t("clipped_extension.regenerate_thumbnails")
       
       - form_tag refresh_admin_asset_path(@asset), :method => :put do
         %p.asset_buttons
