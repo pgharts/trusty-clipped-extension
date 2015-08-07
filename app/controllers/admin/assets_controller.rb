@@ -15,7 +15,7 @@ class Admin::AssetsController < Admin::ResourceController
       assets = assets.of_types(@types)
     end
     
-    @assets = paginated? ? assets.paginate(pagination_parameters) : assets.all
+    @assets = paginated? ? assets.paginate(pagination_parameters.merge({per_page: 1})) : assets.all
     respond_to do |format|
 
       format.js {

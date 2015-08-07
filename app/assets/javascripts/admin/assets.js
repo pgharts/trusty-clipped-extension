@@ -1,6 +1,6 @@
 Assets = {
   attachEvents: function() {
-    $('a.attach_asset').click(function(e){
+    $('a.attach_asset').off('click').click(function(e){
       e.preventDefault();
       var link = $(this);
       var container = link.parents('li.asset');
@@ -16,13 +16,13 @@ Assets = {
       });
     });
 
-    $('a.detach_asset').click(function(e){
+    $('a.detach_asset').off('click').click(function(e){
       e.preventDefault();
       var link = $(this);
       Assets.removeFromList(link.parents('li.asset'));
     });
 
-    $('a.insert_asset').click(function(e){
+    $('a.insert_asset').off('click').click(function(e){
       e.preventDefault();
       var part_name = $("a.tab.here").children('span').html();
       if (part_name.indexOf(' ')) part_name = part_name.replace(' ', '-');
@@ -39,7 +39,7 @@ Assets = {
 
     });
 
-    $(".pagination a").click(function(e){
+    $(".pagination a").off('click').click(function(e){
       e.preventDefault();
       $.ajax({
         method: 'get',
