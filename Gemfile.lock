@@ -1,16 +1,12 @@
 PATH
   remote: .
   specs:
-<<<<<<< Updated upstream
-    trusty-clipped-extension (2.0.1.pre.beta)
-=======
-    trusty-clipped-extension (2.0.0.pre.beta)
->>>>>>> Stashed changes
-      acts_as_list (= 0.4.0)
-      cocaine (~> 0.5)
-      paperclip (~> 4.2)
-      trusty-cms (~> 2.0.0.pre.beta)
-      uuidtools (~> 2.1)
+    trusty-clipped-extension (2.0.2.pre.beta)
+    acts_as_list (= 0.4.0)
+    cocaine (~> 0.5)
+    paperclip (~> 4.2)
+    trusty-cms (~> 2.0.0.pre.beta)
+    uuidtools (~> 2.1)
 
 GEM
   remote: https://rubygems.org/
