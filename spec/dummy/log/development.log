@@ -1014,3 +1014,16 @@ WHERE fk.referenced_column_name is not null
 
   [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `users`[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+Command :: convert -version
+[Clipped] Using image thumbnailer: ImageMagick 6.9.1-10 Q16 x86_64 2015-07-26 http://www.imagemagick.org
+Command :: convert -version
+[Clipped] Using image thumbnailer: ImageMagick 6.9.1-10 Q16 x86_64 2015-07-26 http://www.imagemagick.org
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Asset> at /Users/sipple/Development/trusty-clipped-extension/app/models/asset.rb:38)
+  [1m[36m (0.5ms)[0m  [1mSELECT DISTINCT class_name FROM pages WHERE class_name <> '' AND class_name IS NOT NULL[0m
+  [1m[35m (0.3ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations`

@@ -13,6 +13,22 @@
 
 ActiveRecord::Schema.define(version: 20120209231801) do
 
+  create_table "assets", force: :cascade do |t|
+    t.string   "caption",            limit: 255
+    t.string   "title",              limit: 255
+    t.string   "asset_file_name",    limit: 255
+    t.string   "asset_content_type", limit: 255
+    t.integer  "asset_file_size",    limit: 4
+    t.integer  "created_by_id",      limit: 4
+    t.integer  "updated_by_id",      limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "uuid",               limit: 255
+    t.integer  "original_width",     limit: 4
+    t.integer  "original_height",    limit: 4
+    t.string   "original_extension", limit: 255
+  end
+
   create_table "config", force: :cascade do |t|
     t.string "key",   limit: 40,  default: "", null: false
     t.string "value", limit: 255, default: ""
@@ -35,6 +51,12 @@ ActiveRecord::Schema.define(version: 20120209231801) do
     t.integer  "updated_by_id", limit: 4
     t.string   "content_type",  limit: 40
     t.integer  "lock_version",  limit: 4,     default: 0
+  end
+
+  create_table "page_attachments", force: :cascade do |t|
+    t.integer "asset_id", limit: 4
+    t.integer "page_id",  limit: 4
+    t.integer "position", limit: 4
   end
 
   create_table "page_fields", force: :cascade do |t|
@@ -104,15 +126,15 @@ ActiveRecord::Schema.define(version: 20120209231801) do
     t.string   "email",         limit: 255
     t.string   "login",         limit: 40,    default: "",    null: false
     t.string   "password",      limit: 40
+    t.boolean  "admin",                       default: false, null: false
+    t.boolean  "designer",                    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_id", limit: 4
     t.integer  "updated_by_id", limit: 4
-    t.boolean  "admin",                       default: false, null: false
-    t.boolean  "designer",                    default: false, null: false
+    t.string   "salt",          limit: 255
     t.text     "notes",         limit: 65535
     t.integer  "lock_version",  limit: 4,     default: 0
-    t.string   "salt",          limit: 255
     t.string   "session_token", limit: 255
     t.string   "locale",        limit: 255
   end

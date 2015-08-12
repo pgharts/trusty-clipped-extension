@@ -8,6 +8,7 @@ source 'https://rubygems.org'
 # dependency mentioned in radiant.gemspec.
 
 gem 'trustygems', '~> 0.2.0'
+gem "trusty-cms", path: "../trusty-cms"
 
 gemspec
 
