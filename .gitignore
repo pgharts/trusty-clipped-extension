@@ -3,6 +3,8 @@
 # ignore log files
 log/*.log
 tmp/**/*
+spec/dummy/log/*.log
+spec/dummy/tmp/*
 
 db/schema.rb
 

@@ -55,8 +55,8 @@ module TrustyCms
     # An example of how to add extensions:
     # config.extensions = [ :snippets, :clipped, :layouts, :reorder, :multi_site, :rad_social]
 
-    config.extensions = []
-    config.extensions_migration_order = []
+    config.extensions = [:clipped]
+    config.extensions_migration_order = [:clipped]
 
     # By default, only English translations are loaded. Remove any of these from
     # the list below if you'd like to provide any of the additional options
