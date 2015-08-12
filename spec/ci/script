@@ -1,2 +1,0 @@
-cd ~/radiant
-bundle exec rake spec:extensions EXT=clipped
