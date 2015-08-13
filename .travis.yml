@@ -23,6 +23,4 @@ branches:
     - master
 
 notifications:
-  recipients:
-    - sipple@trustarts.org
   slack: trustarts:FrVc7H8dDadhctfZ7NvHTZES
