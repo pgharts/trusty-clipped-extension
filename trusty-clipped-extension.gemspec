@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency "uuidtools",    "~> 2.1"
   s.add_dependency "cocaine",      "~> 0.5"
   s.add_dependency "trusty-cms",   "~> 2.0.16"
+  s.add_dependency "rake",         "< 11.0"
 
   ignores = if File.exist?('.gitignore')
     File.read('.gitignore').split("\n").inject([]) {|a,p| a + Dir[p] }
