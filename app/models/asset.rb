@@ -18,7 +18,7 @@ class Asset < ActiveRecord::Base
 
   scope :of_types, lambda { |types|
     mimes = AssetType.slice(*types).map(&:mime_types).flatten
-    where(["asset_content_type IN (#{mimes.map{'?'}.join(',')})", *mimes])
+    Asset.select { |x| mimes.include?(x.asset_content_type) }
   }
 
   scope :matching, lambda { |term|
@@ -34,7 +34,7 @@ class Asset < ActiveRecord::Base
       {}
     end
   }
-    
+
   has_attached_file :asset,
                     :styles => lambda { |attachment|
                       AssetType.for(attachment).paperclip_styles
@@ -56,7 +56,7 @@ class Asset < ActiveRecord::Base
 
   before_save :assign_title
   before_save :assign_uuid
-  
+
   after_post_process :read_dimensions
 
   validates_attachment_presence :asset, :message => "You must choose a file to upload!"
@@ -86,14 +86,14 @@ class Asset < ActiveRecord::Base
 
   def extension(style_name='original')
      if style_name == 'original'
-       return original_extension 
+       return original_extension
      elsif style = paperclip_styles[style_name.to_sym]
-       return style.format 
+       return style.format
      else
        return original_extension
      end
   end
-  
+
   def original_extension
     return asset_file_name.split('.').last.downcase if asset_file_name
   end
@@ -101,11 +101,11 @@ class Asset < ActiveRecord::Base
   def attached_to?(page)
     pages.include?(page)
   end
-  
+
   def original_geometry
     @original_geometry ||= Paperclip::Geometry.new(original_width, original_height)
   end
-  
+
   def geometry(style_name='original')
     raise Paperclip::StyleError, "Requested style #{style_name} is not defined for this asset." unless has_style?(style_name)
     @geometry ||= {}
@@ -131,9 +131,9 @@ class Asset < ActiveRecord::Base
     case
     when a == nil?
       'unknown'
-    when a < 1.0 
+    when a < 1.0
       'vertical'
-    when a > 1.0 
+    when a > 1.0
       'horizontal'
     else
       'square'
@@ -159,17 +159,17 @@ class Asset < ActiveRecord::Base
   def horizontal?(style_name='original')
     geometry(style_name).horizontal?
   end
-  
+
   def dimensions_known?
     original_width? && original_height?
   end
-  
+
 private
 
   # at this point the file queue will not have been written
   # but the upload should be in place. We read dimensions from the
   # original file and calculate thumbnail dimensions later, on demand.
-  
+
   def read_dimensions
     if image?
       if file = asset.queued_for_write[:original]
@@ -185,16 +185,16 @@ private
   def assign_title
     self.title = basename unless title?
   end
-  
+
   def assign_uuid
     self.uuid = UUIDTools::UUID.timestamp_create.to_s unless uuid?
   end
-  
+
   class << self
     def known_types
       AssetType.known_types
     end
-    
+
     # searching and pagination moved to the controller
 
     def find_all_by_asset_types(asset_types, *args)
@@ -206,7 +206,8 @@ private
     end
 
     def with_asset_types(asset_types, &block)
-      with_scope(where(AssetType.conditions_for(asset_types)), &block)
+      w_asset_types = AssetType.conditions_for(asset_types)
+      with_scope(where(:conditions => ["#{w_asset_types} = ?", block]))
     end
   end
 
@@ -231,14 +232,14 @@ private
 
   # this is a convenience for image-pickers
   def self.thumbnail_options
-    asset_sizes = thumbnail_sizes.collect{|k,v| 
+    asset_sizes = thumbnail_sizes.collect{|k,v|
       size_id = k
       size_description = "#{k}: "
       size_description << (v.is_a?(Array) ? v.join(' as ') : v)
-      [size_description, size_id] 
+      [size_description, size_id]
     }.sort_by{|pair| pair.last.to_s}
     asset_sizes.unshift ['Original (as uploaded)', 'original']
     asset_sizes
   end
-  
+
 end
