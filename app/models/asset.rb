@@ -206,7 +206,8 @@ private
     end
 
     def with_asset_types(asset_types, &block)
-      with_scope(where(:conditions => ["AssetType.conditions_for(asset_types) = ?", block]))
+      w_asset_types = AssetType.conditions_for(asset_types)
+      with_scope(where(:conditions => ["w_asset_types = ?", block]))
     end
   end
 
