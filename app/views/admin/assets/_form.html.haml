@@ -2,9 +2,6 @@
 - render_region :form do |form|
   - form.edit_title do
     %fieldset.title
-      %label{ :for => "asset_title" }
-        = t("clipped_extension.title")
-      = f.text_field :title, :class => 'textbox', :maxlength => 100
   - form.edit_metadata do
     .drawer
       .drawer_contents#attributes

@@ -17,26 +17,7 @@
           %p
             %a#attach-popup{:href=>"#attach_asset", :style => 'color: #666; font-size: .8em'}= t('clipped_extension.attach_existing')
 
-
-      = form_tag('/admin/assets/', :id=> 'update_asset', :class => 'upload_asset') do |f|
-        = hidden_field_tag "for_attachment", 1
-        = hidden_field_tag "page_id", @page.id
-        = hidden_field_tag "asset_id", ""
-
-        #update-controls
-          %p
-            %strong
-              = label_tag :title, t("clipped_extension.alt_text_or_title")
-          %p
-            = text_field_tag :title, nil, {:name => "asset[title]", :class => "textbox big"}
-
-          .buttons
-            = button_tag "Set Title", {:id => 'update-asset', :class => "button"}
-            #update-status{:style => 'display: none;'}
-              %img{:src => "/assets/admin/spinner.gif"}
-            = t('or')
-            %a.close_popup{:href=>"#"}= 'Continue'
-    #upload_holders
+      %a.close_popup{:href=>"#"}= 'Upload Complete. Click to Close.'
     
   - popups.attach_asset do
     #attach_asset.popup.textured{:style=>"display: none;"}
@@ -53,4 +34,4 @@
       .busy{:style => "display: none"}= image('spinner.gif', :alt => "")
       .buttons
         %a.cancel.close_popup{:href=>"#"}= t('close')
-        %a.upload-popup{:href=>"#upload_asset", :id=> "upload_asset_link", :style => 'color: #666; float: left'}= t('clipped_extension.upload_asset')
+        %a{:href=>"#upload_asset", :id=> "upload_asset_link", :style => 'color: #666; float: left'}= t('clipped_extension.upload_asset')
