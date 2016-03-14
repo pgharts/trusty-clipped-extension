@@ -62,6 +62,8 @@ class Asset < ActiveRecord::Base
   validates_attachment_presence :asset, :message => "You must choose a file to upload!"
   if TrustyCms.config["paperclip.skip_filetype_validation"] != "true" && TrustyCms.config['paperclip.content_types']
     validates_attachment_content_type :asset, :content_type => TrustyCms.config["paperclip.content_types"].gsub(' ','').split(',')
+  else
+    validates_attachment_presence :asset, :message => "Your uploaded file must have an extension in its name!"
   end
   validates_attachment_size :asset, :less_than => ( TrustyCms.config["assets.max_asset_size"] || 5 ).to_i.megabytes
 
@@ -183,7 +185,7 @@ private
   end
 
   def assign_title
-    self.title = basename unless title?
+    self.title = self.asset_file_name
   end
 
   def assign_uuid
