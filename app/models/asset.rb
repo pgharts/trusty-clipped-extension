@@ -185,7 +185,7 @@ private
   end
 
   def assign_title
-    self.title = self.asset_file_name
+    self.title = title
   end
 
   def assign_uuid
