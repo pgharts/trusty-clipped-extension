@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-clipped-extension (2.0.9)
+    trusty-clipped-extension (2.0.10)
       acts_as_list (~> 0.4.0)
       cocaine (~> 0.5)
       paperclip (~> 4.2)
@@ -249,7 +249,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
-    trusty-cms (2.0.19)
+    trusty-cms (2.0.20)
       RedCloth (~> 4.2)
       acts_as_tree (~> 2.1)
       bundler (~> 1.7)
