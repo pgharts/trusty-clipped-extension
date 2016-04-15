@@ -25,7 +25,7 @@ Assets = {
     $('a.insert_asset').off('click').click(function(e){
       e.preventDefault();
       var part_name = $("a.tab.here").children('span').html();
-      if (part_name.indexOf(' ')) part_name = part_name.replace(' ', '-');
+      if (part_name.indexOf(' ')) part_name = part_name.replace(' ', '-').toLowerCase();
       part_name = part_name.replace('_', '-');
       var part_id = 'part_' + part_name + '_content';
       var tag_parts = $(this).attr('rel').split('_');
