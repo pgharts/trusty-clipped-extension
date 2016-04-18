@@ -43,6 +43,7 @@ class Asset < ActiveRecord::Base
                       asset.paperclip_processors
                     },
                     :whiny => false,
+                    :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 1.year.from_now.httpdate },
                     :storage => TrustyCms.config["paperclip.storage"],
                     :path => TrustyCms.config["paperclip.path"],
                     :url => TrustyCms.config["paperclip.url"],
@@ -50,7 +51,11 @@ class Asset < ActiveRecord::Base
                         TrustyCmsClippedExtension::Cloud.credentials,
                     :fog_directory => TrustyCms.config["paperclip.fog.directory"],
                     :fog_public => TrustyCms.config["paperclip.fog.public?"] || true,
-                    :fog_host => TrustyCmsClippedExtension::Cloud.host
+                    :fog_host => TrustyCmsClippedExtension::Cloud.host,
+                    :fog_file => {
+                        'Cache-Control' => 'max-age=2419200'
+                        #'Expires'       => 1.month.from_now.httpdate
+                    }
 
   validates_attachment_content_type :asset, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf", "application/javascript", "text/javascript", "text/css"]
 
