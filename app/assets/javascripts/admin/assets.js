@@ -259,6 +259,7 @@ $(function() {
       Assets.activateUpload();
       $("#asset_asset").attr("disabled", false);
       $('#upload-status').hide();
+      $("#popup_window").hide();
     }
   });
 
