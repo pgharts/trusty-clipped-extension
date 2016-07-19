@@ -19,3 +19,5 @@ exclude_paths:
 - "**/vendor/**/*"
 - db/migrate/**/*
 - config/**/*
+- "app/assets/javascripts/admin/jquery.fileupload.js"
+- "app/assets/javascripts/admin/jquery.ui.widget.js"
