@@ -34,6 +34,7 @@ class Admin::AssetsController < Admin::ResourceController
       if uploaded_asset.content_type == "application/octet-stream"
         flash[:notice] = "Please only upload assets that have a valid extension in the name."
       else
+        uploaded_asset = compress(uploaded_asset) if $kraken.api_key.present?
         @asset = Asset.create(:asset => uploaded_asset, :caption => params[:asset][:caption])
         if params[:for_attachment]
           @page = Page.find_by_id(params[:page_id]) || Page.new
@@ -69,6 +70,13 @@ class Admin::AssetsController < Admin::ResourceController
     Asset.all.each { |asset| asset.asset.reprocess! }
     flash[:notice] = t('clipped_extension.all_thumbnails_refreshed')
     redirect_to admin_assets_path
+  end
+
+private
+  def compress(uploaded_asset)
+    data = $kraken.upload(uploaded_asset.tempfile.path)
+    File.write(uploaded_asset.tempfile, open(data.kraked_url).read, { :mode => 'wb' })
+    uploaded_asset
   end
   
 end
