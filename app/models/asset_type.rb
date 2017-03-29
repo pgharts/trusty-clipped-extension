@@ -1,5 +1,5 @@
 class AssetType
-  
+
   # The Asset Type encapsulates a type of attachment.
   # Conventionally this would a sensible category like 'image' or 'video'
   # that should be processed and presented in a particular way.
@@ -9,14 +9,14 @@ class AssetType
   #   * mime type list for file recognition
   #   * selectors and scopes for retrieving this (or not this) category of asset
   #   * radius tags for those subsets of assets (temporarily removed pending discussion of interface)
-  
+
   @@types = []
   @@type_lookup = {}
   @@extension_lookup = {}
   @@mime_lookup = {}
   @@default_type = nil
   attr_reader :name, :processors, :styles, :icon_name, :catchall, :default_radius_tag
-  
+
   def initialize(name, options = {})
     options = options.symbolize_keys
     @name = name
@@ -31,17 +31,17 @@ class AssetType
     @mimes.each { |mimetype| @@mime_lookup[mimetype] ||= self }
 
     this = self
-    Asset.send :define_method, "#{name}?".intern do this.mime_types.include?(asset_content_type) end 
+    Asset.send :define_method, "#{name}?".intern do this.mime_types.include?(asset_content_type) end
     Asset.send :define_class_method, "#{name}_condition".intern do this.condition; end
     Asset.send :define_class_method, "not_#{name}_condition".intern do this.non_condition; end
     Asset.send :scope, plural.to_sym, -> {where(:conditions => condition)}
     Asset.send :scope, "not_#{plural}".to_sym, -> {where(:conditions => non_condition)}
-    
+
     self.define_radius_tags
     @@types.push self
     @@type_lookup[@name] = self
   end
-  
+
   def plural
     name.to_s.pluralize
   end
@@ -53,11 +53,11 @@ class AssetType
       return "/assets/admin/#{icon_name}_icon.png"
     end
   end
-  
+
   def icon_path(style_name='icon')
     Rails.root + "public#{icon(style_name)}"
   end
-  
+
   def condition
     if @mimes.any?
       ["asset_content_type IN (#{@mimes.map{'?'}.join(',')})", *@mimes]
@@ -65,7 +65,7 @@ class AssetType
       self.class.other_condition
     end
   end
-  
+
   def sanitized_condition
     ActiveRecord::Base.send :sanitize_sql_array, condition
   end
@@ -89,9 +89,9 @@ class AssetType
   def paperclip_processors
     TrustyCms.config["assets.create_#{name}_thumbnails?"] ? processors : []
   end
-  
+
   # Parses and combines the various ways in which paperclip styles can be defined, and normalises them into
-  # the format that paperclip expects. Note that :styles => :standard has already been replaced with the 
+  # the format that paperclip expects. Note that :styles => :standard has already been replaced with the
   # results of a call to standard_styles.
   # Styles are passed to paperclip as a hash and arbitrary keys can be passed through from configuration.
   #
@@ -105,9 +105,9 @@ class AssetType
     end
     @paperclip_styles
   end
-  
+
   # Takes a motley collection of differently-defined styles and renders them into the standard hash-of-hashes format.
-  # Solitary strings are assumed to be 
+  # Solitary strings are assumed to be
   #TODO: define permitted and/or expected options for the asset type and pass through that subset of the style-definition hash
   #
   def normalize_style_rules(styles={})
@@ -128,12 +128,10 @@ class AssetType
   
   def standard_styles
     {
-      :native => { :geometry => "", :format => :jpg },
-      :icon => { :geometry => '42x42#', :format => :png },
       :thumbnail => { :geometry => '100x100#', :format => :png }
     }
   end
-  
+
   # Paperclip styles are defined in the config entry `assets.thumbnails.asset_type`, with the format:
   # foo:key-x,key=y,key=z|bar:key-x,key=y,key=z
   # where 'key' can be any parameter understood by your paperclip processors. Usually they include :geometry and :format.
@@ -153,17 +151,17 @@ class AssetType
       {}
     end
   end
-  
+
   def legacy_styles
     TrustyCms::config["assets.additional_thumbnails"].to_s.gsub(' ','').split(',').collect{|s| s.split('=')}.inject({}) {|ha, (k, v)| ha[k.to_sym] = v; ha}
   end
-  
+
   def style_dimensions(style_name)
     if style = paperclip_styles[style_name.to_sym]
       style[:size]
     end
   end
-  
+
   def define_radius_tags
     type = self.name
     Page.class_eval {
@@ -175,9 +173,9 @@ class AssetType
       end
     }
   end
-  
+
   # class methods
-  
+
   def self.for(attachment)
     extension = File.extname(attachment.original_filename).sub(/^\.+/, "")
     from_extension(extension) || from_mimetype(attachment.instance_read(:content_type)) || catchall
@@ -190,11 +188,11 @@ class AssetType
   def self.from_mimetype(mimetype)
     @@mime_lookup[mimetype]
   end
-  
+
   def self.catchall
     @@default_type ||= self.find(:other)
   end
-  
+
   def self.known?(name)
     !self.find(name).nil?
   end
@@ -209,7 +207,7 @@ class AssetType
   def self.[](type)
     find(type)
   end
-  
+
   def self.all
     @@types
   end
@@ -221,7 +219,7 @@ class AssetType
   def self.known_mimetypes
     @@mime_lookup.keys
   end
-    
+
   def self.mime_types_for(*names)
     names.collect{ |name| find(name).mime_types }.flatten
   end
