@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-clipped-extension (2.0.14)
+    trusty-clipped-extension (2.0.15)
       acts_as_list (~> 0.4.0)
       cocaine (~> 0.5)
       kraken-io
@@ -134,7 +134,7 @@ GEM
       multipart-post
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.19)
+    libv8 (3.16.14.19-x86_64-darwin-16)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
