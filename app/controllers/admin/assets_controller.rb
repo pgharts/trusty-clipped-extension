@@ -1,21 +1,21 @@
 class Admin::AssetsController < Admin::ResourceController
   paginate_models(:per_page => 50)
   COMPRESS_FILE_TYPE = ["image/jpeg", "image/png", "image/gif", "image/svg+xml"]
-  
+
   def index
     assets = Asset.order("created_at DESC")
     @page = Page.find(params[:page_id]) if params[:page_id]
 
     @term = params[:search] || ''
     assets = assets.matching(@term) if @term && !@term.blank?
-    
+
     @types = params[:filter] ? params[:filter].split(",") : []
     if @types.include?('all')
       params[:filter] = nil
     elsif @types.any?
       assets = assets.of_types(@types)
     end
-    
+
     @assets = paginated? ? assets.paginate(pagination_parameters) : assets.all
     respond_to do |format|
 
@@ -28,7 +28,7 @@ class Admin::AssetsController < Admin::ResourceController
       }
     end
   end
-  
+
   def create
     @assets, @page_attachments = [], []
     params[:asset][:asset].to_a.each do |uploaded_asset|
@@ -46,11 +46,11 @@ class Admin::AssetsController < Admin::ResourceController
     end
     if params[:for_attachment]
       render :partial => 'admin/page_attachments/attachment', :collection => @page_attachments
-    else 
+    else
       response_for :create
     end
   end
-  
+
   def refresh
     if params[:id]
       @asset = Asset.find(params[:id])
@@ -61,7 +61,7 @@ class Admin::AssetsController < Admin::ResourceController
       render
     end
   end
-  
+
   only_allow_access_to :regenerate,
     :when => [:admin],
     :denied_url => { :controller => 'admin/assets', :action => 'index' },
@@ -75,9 +75,9 @@ class Admin::AssetsController < Admin::ResourceController
 
 private
   def compress(uploaded_asset)
-    data = $kraken.upload(uploaded_asset.tempfile.path)
+    data = $kraken.upload(uploaded_asset.tempfile.path, 'lossy' => true)
     File.write(uploaded_asset.tempfile, open(data.kraked_url).read, { :mode => 'wb' })
     uploaded_asset
   end
-  
+
 end

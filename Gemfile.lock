@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-clipped-extension (2.0.14)
+    trusty-clipped-extension (2.0.15)
       acts_as_list (~> 0.4.0)
       cocaine (~> 0.5)
       kraken-io
@@ -103,8 +103,8 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffi (1.9.10)
-    globalid (0.3.7)
-      activesupport (>= 4.1.0)
+    globalid (0.4.0)
+      activesupport (>= 4.2.0)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -134,10 +134,10 @@ GEM
       multipart-post
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.19)
+    libv8 (3.16.14.19-x86_64-darwin-16)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.4)
+    mail (2.6.5)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
     mime-types (3.0)
@@ -228,7 +228,7 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.4)
-    ruby_parser (3.8.4)
+    ruby_parser (3.9.0)
       sexp_processor (~> 4.1)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -237,7 +237,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sexp_processor (4.8.0)
+    sexp_processor (4.9.0)
     slop (3.6.0)
     sprockets (2.12.4)
       hike (~> 1.2)
