@@ -20,6 +20,5 @@ group :development, :test do
   gem 'poltergeist',      '~> 1.14.0'
   gem 'factory_girl_rails', '~> 4.6.0'
   gem 'rails-observers', :git => 'https://github.com/rails/rails-observers'
-  gem "protected_attributes_continued"
   gem "pry-byebug"
 end
