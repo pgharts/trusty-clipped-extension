@@ -31,12 +31,12 @@ class Admin::AssetsController < Admin::ResourceController
 
   def create
     @assets, @page_attachments = [], []
-    params[:asset][:asset].to_a.each do |uploaded_asset|
+    asset_params[:asset][:asset].to_a.each do |uploaded_asset|
       if uploaded_asset.content_type == "application/octet-stream"
         flash[:notice] = "Please only upload assets that have a valid extension in the name."
       else
         uploaded_asset = compress(uploaded_asset) if $kraken.api_key.present? && COMPRESS_FILE_TYPE.include?(uploaded_asset.content_type)
-        @asset = Asset.create(:asset => uploaded_asset, :caption => params[:asset][:caption])
+        @asset = Asset.create(:asset => uploaded_asset, :caption => asset_params[:asset][:caption])
         if params[:for_attachment]
           @page = Page.find_by_id(params[:page_id]) || Page.new
           @page_attachments << @page_attachment = @asset.page_attachments.build(:page => @page)
@@ -44,7 +44,7 @@ class Admin::AssetsController < Admin::ResourceController
         @assets << @asset
       end
     end
-    if params[:for_attachment]
+    if asset_params[:for_attachment]
       render :partial => 'admin/page_attachments/attachment', :collection => @page_attachments
     else
       response_for :create
@@ -52,7 +52,7 @@ class Admin::AssetsController < Admin::ResourceController
   end
 
   def refresh
-    if params[:id]
+    if asset_params[:id]
       @asset = Asset.find(params[:id])
       @asset.asset.reprocess!
       flash[:notice] = t('clipped_extension.thumbnails_refreshed')
@@ -80,4 +80,7 @@ private
     uploaded_asset
   end
 
+  def asset_params
+    params.permit(:id, :asset => [:caption, :for_attachment, :asset => []])
+  end
 end

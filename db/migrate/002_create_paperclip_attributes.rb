@@ -1,4 +1,4 @@
-class CreatePaperclipAttributes < ActiveRecord::Migration
+class CreatePaperclipAttributes < ActiveRecord::Migration[5.1]
   def self.up
     add_column :assets, :asset_file_name, :string
     add_column :assets, :asset_content_type, :string
