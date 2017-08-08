@@ -1,4 +1,4 @@
-class RenameUsers < ActiveRecord::Migration
+class RenameUsers < ActiveRecord::Migration[5.1]
   
   def self.up
     rename_column :assets, :created_by, :created_by_id
