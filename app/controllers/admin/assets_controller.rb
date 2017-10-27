@@ -81,6 +81,6 @@ private
   end
 
   def asset_params
-    params.permit(:id, :asset => [:caption, :for_attachment, :asset => []])
+    params.permit(:id, :for_attachment, :asset => [:caption, :for_attachment, :asset => []])
   end
 end
