@@ -47,7 +47,7 @@ class Admin::AssetsController < Admin::ResourceController
     if asset_params[:for_attachment]
       render :partial => 'admin/page_attachments/attachment', :collection => @page_attachments
     else
-      response_for :create
+      render :partial => 'admin/page_attachments/attachment'
     end
   end
 
