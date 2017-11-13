@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    trusty-clipped-extension (3.1.1)
+    trusty-clipped-extension (3.1.2)
       acts_as_list (~> 0.9.5)
       cocaine (~> 0.5.8)
       kraken-io
@@ -150,13 +150,14 @@ GEM
     libv8 (3.16.14.19)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.6)
-      mime-types (>= 1.16, < 4)
+    mail (2.7.0)
+      mini_mime (>= 0.1.1)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
+    mini_mime (1.0.0)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
     multi_json (1.12.2)
@@ -326,4 +327,4 @@ DEPENDENCIES
   trustygems (~> 0.2.0)
 
 BUNDLED WITH
-   1.16.0.pre.2
+   1.16.0
