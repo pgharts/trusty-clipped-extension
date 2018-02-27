@@ -31,11 +31,12 @@ class Admin::AssetsController < Admin::ResourceController
 
   def create
     @assets, @page_attachments = [], []
+    compress = current_site.try(:compress) ? current_site.compress : true
     asset_params[:asset][:asset].to_a.each do |uploaded_asset|
       if uploaded_asset.content_type == "application/octet-stream"
         flash[:notice] = "Please only upload assets that have a valid extension in the name."
       else
-        uploaded_asset = compress(uploaded_asset) if $kraken.api_key.present? && COMPRESS_FILE_TYPE.include?(uploaded_asset.content_type)
+        uploaded_asset = compress(uploaded_asset) if $kraken.api_key.present? && COMPRESS_FILE_TYPE.include?(uploaded_asset.content_type) && compress
         @asset = Asset.create(:asset => uploaded_asset, :caption => asset_params[:asset][:caption])
         if params[:for_attachment]
           @page = Page.find_by_id(params[:page_id]) || Page.new
